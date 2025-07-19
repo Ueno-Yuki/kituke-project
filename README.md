@@ -1,40 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# 着付けサービス Sakai
 
-## Getting Started
+このプロジェクトは、着付けサービスの個人サイトです。
+Next.jsをベースに、和の雰囲気を持つGoogle Fonts「Shippori Mincho B1」を全体に適用し、
+スマートフォンにも最適化されたレスポンシブデザイン、ダーク/ライトテーマ切り替え、
+FontAwesomeによるアイコン表示、セクションごとのカスタマイズ性を重視しています。
 
-First, run the development server:
+## 主な特徴
+- Next.js（TypeScript）
+- Google Fonts「Shippori Mincho B1」デフォルト適用
+- スマホ・PC両対応のレスポンシブデザイン
+- ダーク/ライトテーマ切り替え（右上トグル）
+- FontAwesomeアイコン（テーマ切り替え・ハンバーガーメニュー）
+- セクションごとに独自CSSでカスタマイズ可能
+- テキストやリスト内容は各ファイルで自由に編集可能
+
+## セットアップ
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+ブラウザで [http://localhost:3000](http://localhost:3000) を開いてください。
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## カスタマイズ方法
+- フォントを変更したい場合は `src/pages/_document.tsx` のGoogle Fonts `<link>` を編集
+- セクションの内容やデザインは `src/components/sections/` 配下の各ファイル・CSSで編集
+- テーマ切り替えやアイコンは `src/components/ThemeToggle.tsx` で制御
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## デプロイ
+VercelなどのNext.js対応ホスティングでそのままデプロイ可能です。
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+Next.jsの詳細は[公式ドキュメント](https://nextjs.org/docs)をご覧ください。
