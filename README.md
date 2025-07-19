@@ -1,4 +1,4 @@
-# 着付けサービス Sakai
+# 着付けサービス
 
 このプロジェクトは、着付けサービスの個人サイトです。
 Next.jsをベースに、和の雰囲気を持つGoogle Fonts「Shippori Mincho B1」を全体に適用し、
