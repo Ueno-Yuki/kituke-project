@@ -1,0 +1,49 @@
+.menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s, color 0.3s;
+}
+
+.menu.light {
+  background: #fff;
+  color: #171717;
+}
+
+.menu.dark {
+  background: #171717;
+  color: #fff;
+}
+.menu.dark .sectionList,
+.menu.dark .sectionList a {
+  color: #fff !important;
+}
+
+.sectionList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.sectionList li {
+  margin: 2rem 0;
+}
+
+.sectionList a {
+  font-size: 2rem;
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.sectionList a:hover {
+  text-decoration: underline;
+  color: #b48a78;
+} 

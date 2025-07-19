@@ -1,0 +1,43 @@
+.aboutRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  min-height: 50vh;
+  height: 50vh;
+}
+
+@media (max-width: 768px) {
+  .aboutRow {
+    flex-direction: column;
+    gap: 0.2rem;
+    align-items: stretch;
+  }
+  .aboutTitle {
+    min-width: 0;
+    flex-basis: auto;
+    text-align: left;
+    margin-bottom: 0.2em;
+  }
+  .aboutText {
+    flex-basis: auto;
+    font-size: 1.1rem !important;
+    line-height: 2.2 !important;
+  }
+}
+
+.aboutTitle {
+  color: #b48a78;
+  font-size: 2.2rem;
+  font-weight: bold;
+  min-width: 180px;
+  white-space: nowrap;
+  flex-basis: 30%;
+  flex-shrink: 0;
+}
+
+.aboutText {
+  color: var(--foreground);
+  font-size: 1.4rem;
+  line-height: 2;
+  flex-basis: 70%;
+} 
