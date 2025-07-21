@@ -6,17 +6,18 @@ interface SectionProps {
   children: ReactNode;
   className?: string;
   style?: React.CSSProperties;
+  id?: string;
 }
 
-export default function Section({ children, className = "", style }: SectionProps) {
+export default function Section({ children, className = "", style, id }: SectionProps) {
   const ref = useRef(null);
-
 
   return (
     <section
       ref={ref}
       className={`${styles.section} ${className}`}
       style={style}
+      id={id}
     >
       {children}
     </section>

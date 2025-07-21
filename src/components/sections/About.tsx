@@ -1,18 +1,93 @@
 import Section from "../Section/Section";
 import styles from "../../styles/About.module.css";
-import { useRef } from "react";
+import animationStyles from "../../styles/Animation.module.css";
+import { useRef, useState, useEffect } from "react";
+import { motion, useInView } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
+
+// 追加: 画面幅を判定するカスタムフック
+function useMediaQuery(query: string): boolean {
+  const [matches, setMatches] = useState(false);
+  useEffect(() => {
+    const media = window.matchMedia(query);
+    if (media.matches !== matches) {
+      setMatches(media.matches);
+    }
+    const listener = () => setMatches(media.matches);
+    media.addEventListener("change", listener);
+    return () => media.removeEventListener("change", listener);
+  }, [matches, query]);
+  return matches;
+}
 
 export default function About() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(titleRef, { once: true });
+  const [showText, setShowText] = useState(false);
+
+  // 追加: 768px以下かどうか
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
+  const titles = "私について";
+  const title = titles.split("");
+  const duration = 1.0;
+  const delayPerChar = 0.10;
+  const extraDelay = 0.2; // タイトルが全て表示されてから内容が出るまでの待ち時間（秒）
+  const totalDelay = (title.length - 1) * delayPerChar + duration + extraDelay;
+
+  useEffect(() => {
+    if (inView) {
+      const timer = setTimeout(() => setShowText(true), totalDelay * 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [inView, totalDelay]);
+
+  const textanimate = title.map((char, index) => (
+    <motion.span
+      initial={{ opacity: 0 }}
+      animate={ inView ? { opacity: 1 } : { opacity: 0 }}
+      transition={{ duration, delay: index * delayPerChar }}
+      key={ index }
+    >
+      { char }
+    </motion.span>
+  ));
+
+  // 画面幅でvariantsも切り替え（スマホ用はx:0も明示）
+  const textVariants = isMobile
+    ? {
+        offscreen: { x: 0, y: 40, opacity: 0 },
+        onscreen: {
+          x: 0,
+          y: 0,
+          opacity: 1,
+          transition: { duration: 1.3 }
+        }
+      }
+    : {
+        offscreen: { x: 200, opacity: 0 },
+        onscreen: {
+          x: 0,
+          opacity: 1,
+          transition: { duration: 1.3 }
+        }
+      };
 
   return (
-    <Section>
+    <Section id="about">
       <div className={styles.aboutRow}>
-        <h2 ref={titleRef} className={styles.aboutTitle}>私について</h2>
-        <div ref={textRef} className={styles.aboutText}>
+        <h2 ref={titleRef} className={`${styles.aboutTitle} sectionTitle`}>
+          {textanimate}
+        </h2>
+        <motion.div
+          ref={textRef}
+          className={styles.aboutText}
+          variants={textVariants}
+          initial="offscreen"
+          animate={showText ? "onscreen" : "offscreen"}
+        >
           千葉県在住着付師です。
           もっと着物を日常に！着物は大変。苦しい。高い。そんな色々を吹き飛ばしもっと気楽に着ていただきたい。着る楽しさ。着せる喜び。着物の装いをお手伝いできる喜びをモットーに地域密着で活動させていただいてます。
           <div style={{ marginTop: "0.8rem" }}>
@@ -26,7 +101,7 @@ export default function About() {
               <FontAwesomeIcon icon={faInstagram} style={{ fontSize: "2.2rem", verticalAlign: "middle" }} />
             </a>
           </div>
-        </div>
+        </motion.div>
       </div>
     </Section>
   );

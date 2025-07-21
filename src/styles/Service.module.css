@@ -38,12 +38,6 @@
 
 .serviceTitle {
   color: #7a5c3e;
-  font-size: 2.2rem;
-  font-weight: bold;
-  min-width: 180px;
-  white-space: nowrap;
-  flex-basis: 30%;
-  flex-shrink: 0;
 }
 
 .serviceList {
@@ -59,8 +53,8 @@
 .serviceList li {
   display: inline-block;
   padding: 0.4em 1em;
-  background: #fff;
-  color: #F6A38B;
+  background: #F6A38B;
+  color: #fff;
   border: 0.1em solid #F6A38B;
   border-radius: 500px;
   font-weight: bold;
@@ -71,15 +65,9 @@
 }
 
 body[data-theme="dark"] .serviceList li {
-  background: #222;
-  color: #F6A38B;
-  border: 1.5px solid #F6A38B;
-}
-
-body[data-theme="dark"] .serviceList li:hover {
-  background: #F6A38B;
-  color: #222;
-  border-color: #F6A38B;
+  background: #4ff0b7;
+  color: #181a1b;
+  border: 1.5px solid #4ff0b7;
 }
 
 .serviceText {

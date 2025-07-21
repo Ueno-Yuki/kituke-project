@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import animationStyles from "../styles/Animation.module.css";
 
 // テーマ用コンテキスト
 export const ThemeContext = createContext({
@@ -41,7 +42,12 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      <Component {...pageProps} />
+      <main
+        className={animationStyles.themeTransition}
+        style={{ background: "var(--background)", color: "var(--foreground)", minHeight: "100vh" }}
+      >
+        <Component {...pageProps} />
+      </main>
     </ThemeContext.Provider>
   );
 }

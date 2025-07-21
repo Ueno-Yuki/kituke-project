@@ -1,0 +1,31 @@
+/* フェードインアニメーション */
+.fade {
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(.4,0,.2,1);
+}
+.fadeVisible {
+  opacity: 1;
+}
+
+/* 下からふわっと出てくるアニメーション */
+.fadeUp {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1);
+}
+.fadeUpVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ダーク/ライトモード切替時のトランジション */
+.themeTransition {
+  transition:
+    background 0.5s cubic-bezier(.4,0,.2,1),
+    color 0.5s cubic-bezier(.4,0,.2,1),
+    border-color 0.5s cubic-bezier(.4,0,.2,1),
+    box-shadow 0.5s cubic-bezier(.4,0,.2,1),
+    filter 0.5s cubic-bezier(.4,0,.2,1),
+    fill 0.5s cubic-bezier(.4,0,.2,1),
+    stroke 0.5s cubic-bezier(.4,0,.2,1);
+}

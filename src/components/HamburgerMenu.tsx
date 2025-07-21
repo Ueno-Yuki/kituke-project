@@ -19,6 +19,18 @@ export default function HamburgerMenu({ open, onClose }: HamburgerMenuProps) {
   // テーマ反転
   const menuTheme = theme === "dark" ? "light" : "dark";
 
+  // スクロール＋メニュー閉じ
+  const handleSectionClick = (id: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    onClose();
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 400); // メニュー閉じアニメーションと同じduration
+  };
+
   return (
     <AnimatePresence>
       {open && (
@@ -27,12 +39,12 @@ export default function HamburgerMenu({ open, onClose }: HamburgerMenuProps) {
           initial={{ x: "100%" }}
           animate={{ x: 0 }}
           exit={{ x: "100%" }}
-          transition={{ type: "tween", duration: 0.4 }}
+          transition={{ type: "tween", duration: 0.2 }}
         >
           <ul className={styles.sectionList}>
             {sections.map((section) => (
               <li key={section.id}>
-                <a href={`#${section.id}`} onClick={onClose}>
+                <a href={`#${section.id}`} onClick={handleSectionClick(section.id)}>
                   {section.label}
                 </a>
               </li>
