@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Head from "next/head";
 import MainVisual from "@/components/sections/MainVisual";
+import Slide from "@/components/sections/Slide";
 import About from "@/components/sections/About";
 import Service from "@/components/sections/Service";
 import ThemeToggle from "@/components/ThemeToggle";
@@ -21,6 +22,7 @@ export default function Home() {
       <ThemeToggle menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       <MainVisual />
       <main>
+        <Slide />
         <About />
         <Service />
       </main>

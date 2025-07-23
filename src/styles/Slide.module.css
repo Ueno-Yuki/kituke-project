@@ -1,44 +1,42 @@
-.aboutRow {
-  display: flex;
-  align-items: flex-start;
-  gap: 2rem;
-  min-height: 50vh;
-  height: 50vh;
+.slideRow {
+  min-height: 100vh;
+  height: 100vh;
 }
 
 @media (max-width: 768px) {
-  .aboutRow {
+  .slideRow {
     flex-direction: column;
     gap: 0.2rem;
     align-items: stretch;
     min-height: unset;
     height: auto;
   }
-  .aboutTitle {
+  .slideTitle {
     min-width: 0;
     flex-basis: auto;
     text-align: left;
-    margin-bottom: 1em !important;
+    margin-bottom: 0.5em !important;
     font-size: 1.3rem;
     line-height: 1.2;
   }
-  .aboutText {
+  .slideList {
     flex-basis: auto;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .slideList li {
+    font-size: 0.9rem !important;
+  }
+  .slideRow > div {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .slideText {
     font-size: 1.1rem !important;
     line-height: 2.2 !important;
   }
-  .aboutSNS {
-    margin-top: 0;
-  }
 }
 
-.aboutTitle {
+.slideTitle {
   color: #7a5c3e;
 }
-
-.aboutText {
-  color: var(--foreground);
-  font-size: 1.4rem;
-  line-height: 2;
-  flex-basis: 70%;
-} 

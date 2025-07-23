@@ -1,6 +1,5 @@
 import Section from "../Section/Section";
 import styles from "../../styles/About.module.css";
-import animationStyles from "../../styles/Animation.module.css";
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -90,7 +89,7 @@ export default function About() {
         >
           千葉県在住着付師です。
           もっと着物を日常に！着物は大変。苦しい。高い。そんな色々を吹き飛ばしもっと気楽に着ていただきたい。着る楽しさ。着せる喜び。着物の装いをお手伝いできる喜びをモットーに地域密着で活動させていただいてます。
-          <div style={{ marginTop: "0.8rem" }}>
+          <div className={styles.aboutSNS}>
             <a
               href="https://instagram.com/p/Ct0pKJ1vlwA/"
               target="_blank"

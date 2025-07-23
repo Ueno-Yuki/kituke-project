@@ -11,12 +11,16 @@
     flex-direction: column;
     gap: 0.2rem;
     align-items: stretch;
+    min-height: unset;
+    height: auto;
   }
   .serviceTitle {
     min-width: 0;
     flex-basis: auto;
     text-align: left;
-    margin-bottom: 0.2em;
+    margin-bottom: 0.5em !important;
+    font-size: 1.3rem;
+    line-height: 1.2;
   }
   .serviceList {
     flex-basis: auto;

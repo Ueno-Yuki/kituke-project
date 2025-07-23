@@ -9,6 +9,7 @@ interface HamburgerMenuProps {
 }
 
 const sections = [
+  { id: "slide", label: "着物コレクション" },
   { id: "about", label: "私について" },
   { id: "service", label: "サービス内容" },
   // 必要に応じて追加
