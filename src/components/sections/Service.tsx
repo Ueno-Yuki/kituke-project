@@ -86,18 +86,47 @@ export default function Service() {
           initial="offscreen"
           animate={showText ? "onscreen" : "offscreen"}
         >
-          <ol className={styles.serviceList}>
-            <li>成人式</li>
-            <li>卒業式</li>
-            <li>七五三</li>
-            <li>浴衣</li>
-            <li>振袖</li>
-            <li>留袖</li>
-            <li>お宮参り</li>
-            <li>出張/訪問</li>
-          </ol>
-          <div className={styles.serviceText}>
-            その他ご要望ありましたらご依頼、お問合せお気軽にご連絡下さい！
+          <div className={styles.serviceGrid}>
+            <div className={`${styles.serviceCard} ${styles.seijinshiki}`}>
+              <div className={styles.cardOverlay}>
+                <span className={styles.serviceTitle}>成人式</span>
+              </div>
+            </div>
+            <div className={`${styles.serviceCard} ${styles.sotsugyoushiki}`}>
+              <div className={styles.cardOverlay}>
+                <span className={styles.serviceTitle}>卒業式</span>
+              </div>
+            </div>
+            <div className={`${styles.serviceCard} ${styles.shichigosan}`}>
+              <div className={styles.cardOverlay}>
+                <span className={styles.serviceTitle}>七五三</span>
+              </div>
+            </div>
+            <div className={`${styles.serviceCard} ${styles.yukata}`}>
+              <div className={styles.cardOverlay}>
+                <span className={styles.serviceTitle}>浴衣</span>
+              </div>
+            </div>
+            <div className={`${styles.serviceCard} ${styles.hurisode}`}>
+              <div className={styles.cardOverlay}>
+                <span className={styles.serviceTitle}>振袖</span>
+              </div>
+            </div>
+            <div className={`${styles.serviceCard} ${styles.tomesode}`}>
+              <div className={styles.cardOverlay}>
+                <span className={styles.serviceTitle}>留袖</span>
+              </div>
+            </div>
+            <div className={`${styles.serviceCard} ${styles.omiyamairi}`}>
+              <div className={styles.cardOverlay}>
+                <span className={styles.serviceTitle}>お宮参り</span>
+              </div>
+            </div>
+            <div className={styles.serviceCard}>
+              <div className={styles.cardOverlay}>
+                <span className={`${styles.serviceTitle} ${styles.houmon}`}>出張/訪問</span>
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>

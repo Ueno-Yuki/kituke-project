@@ -1,9 +1,5 @@
 .serviceRow {
-  display: flex;
   align-items: flex-start;
-  gap: 2rem;
-  min-height: 50vh;
-  height: 50vh;
 }
 
 @media (max-width: 768px) {
@@ -17,7 +13,6 @@
   .serviceTitle {
     min-width: 0;
     flex-basis: auto;
-    text-align: left;
     margin-bottom: 0.5em !important;
     font-size: 1.3rem;
     line-height: 1.2;
@@ -42,36 +37,190 @@
 
 .serviceTitle {
   color: #7a5c3e;
+  text-align: center;
+  margin-bottom: 5%;
 }
 
-.serviceList {
-  list-style-type: none;
-  padding: 0;
-  color: var(--foreground);
-  font-size: 1.4rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.7rem;
-}
-
-.serviceList li {
-  display: inline-block;
-  padding: 0.4em 1em;
-  background: #F6A38B;
-  color: #fff;
-  border: 0.1em solid #F6A38B;
-  border-radius: 500px;
+/* カード内のタイトルは白文字で見やすく */
+.cardOverlay .serviceTitle {
+  color: #ffffff;
+  font-size: 1.2rem;
   font-weight: bold;
-  font-size: 1.1rem;
-  line-height: 1.8;
-  margin: 0;
-  cursor: default;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  letter-spacing: 0.05em;
 }
 
-body[data-theme="dark"] .serviceList li {
-  background: #4ff0b7;
-  color: #181a1b;
-  border: 1.5px solid #4ff0b7;
+/* グリッドレイアウト - 4列2行の均一配置 */
+.serviceGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  margin-bottom: 2rem;
+  height: 50rem;
+}
+
+.serviceCard {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+/* .serviceCard:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+} */
+
+/* ホバー時の背景画像透明度を元の解像度に */
+.serviceCard:hover::before {
+  opacity: 1.0;
+}
+
+/* 各サービスの背景画像 */
+.seijinshiki::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/background/service-cad.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.3;
+  transition: opacity 0.6s ease;
+}
+
+.sotsugyoushiki::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/background/service-graduation.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.3;
+  transition: opacity 0.6s ease;
+}
+
+.shichigosan::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/background/service-shichigosan.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.3;
+  transition: opacity 0.6s ease;
+}
+
+.yukata::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/background/service-yukata.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.3;
+  transition: opacity 0.6s ease;
+}
+
+.hurisode::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/background/service-hurisode.jpg');
+  background-size: cover;
+  background-position: 83%;
+  opacity: 0.3;
+  transition: opacity 0.6s ease;
+}
+
+.tomesode::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/background/service-tomesode.jpg');
+  background-size: cover;
+  background-position: 0%;
+  opacity: 0.3;
+  transition: opacity 0.6s ease;
+}
+
+.omiyamairi::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/background/service-omiyamairi.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.3;
+  transition: opacity 0.6s ease;
+}
+
+.houmon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/background/service-houmon.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.3;
+  transition: opacity 0.6s ease;
+}
+
+/* オーバーレイ */
+.cardOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.6s ease;
+}
+
+/* ホバー時はオーバーレイを薄くして画像を見やすく */
+.serviceCard:hover .cardOverlay {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* 全てのカードを均一サイズに */
+.serviceCard {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+/* モバイル対応 */
+@media (max-width: 768px) {
+  .serviceGrid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+  }
 }
 
 .serviceText {

@@ -24,8 +24,6 @@ export default function App({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <main style={{ minHeight: "100vh" }}>
-      <Component {...pageProps} />
-    </main>
+    <Component {...pageProps} />
   );
 }

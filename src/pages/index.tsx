@@ -20,8 +20,8 @@ export default function Home() {
       </Head>
       <ScrollAnimation />
       <HamburgerMenuButton menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-      <MainVisual />
       <main>
+        <MainVisual />
         <Slide />
         <About />
         <Service />
