@@ -1,8 +1,7 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Section from "../Section/Section";
 import animationStyles from "../../styles/Animation.module.css";
 import styles from "../../styles/Slide.module.css";
-import { motion, useInView } from "framer-motion";
 
 const defaultImages = {
   desktop: ['/pc/hero01.jpg'],
@@ -10,18 +9,9 @@ const defaultImages = {
 };
 
 export default function Slide() {
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const inView = useInView(titleRef, { once: true });
   const [availableImages, setAvailableImages] = useState(defaultImages);
   const [isMobile, setIsMobile] = useState(false);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
-
-  const titles = "着物コレクション";
-  const title = titles.split("");
-  const duration = 1.0;
-  const delayPerChar = 0.10;
-  const extraDelay = 0.2; // タイトルが全て表示されてから内容が出るまでの待ち時間（秒）
-  const totalDelay = (title.length - 1) * delayPerChar + duration + extraDelay;
 
   useEffect(() => {
     const loadImagesList = async () => {
@@ -54,16 +44,6 @@ export default function Slide() {
     };
   }, []);
 
-  const textanimate = title.map((char, index) => (
-    <motion.span
-      initial={{ opacity: 0 }}
-      animate={ inView ? { opacity: 1 } : { opacity: 0 }}
-      transition={{ duration, delay: index * delayPerChar }}
-      key={ index }
-    >
-      { char }
-    </motion.span>
-  ));
 
   // スライドショーの自動切り替え
   useEffect(() => {
@@ -100,29 +80,55 @@ export default function Slide() {
         </div>
       );
     } else {
-      // デスクトップ：3枚同時表示
-      const extendedImages = [...images];
-      while (extendedImages.length < 3) {
-        extendedImages.push(...images);
-      }
-      
-      const displayImages = extendedImages.slice(currentSlideIndex, currentSlideIndex + 3);
-      if (displayImages.length < 3) {
-        displayImages.push(...extendedImages.slice(0, 3 - displayImages.length));
-      }
+      // デスクトップ：新しい構造 - 左側大きな画像、右側2枚の小さな画像
+      const currentMainImage = images[currentSlideIndex % images.length];
+      const smallImage1 = images[(currentSlideIndex + 1) % images.length];
+      const smallImage2 = images[(currentSlideIndex + 2) % images.length];
       
       return (
-        <div className={animationStyles.rectangleSlideContainer}>
-          <div className={animationStyles.slideWrapper}>
-            {displayImages.map((image, index) => (
-              <div
-                key={`slide-${currentSlideIndex}-${index}`}
-                className={animationStyles.rectangleSlideImage}
-                style={{
-                  backgroundImage: `url('${image}')`,
-                }}
+        <div className={styles.slideLayout}>
+          {/* 左側の大きな画像とコントロール */}
+          <div className={styles.mainImageSection}>
+            <div 
+              className={styles.mainImage}
+              style={{ backgroundImage: `url('${currentMainImage}')` }}
+            />
+            <div className={styles.slideControls}>
+              <button 
+                className={styles.prevButton}
+                onClick={() => setCurrentSlideIndex(prev => prev === 0 ? images.length - 1 : prev - 1)}
+              >
+                ‹
+              </button>
+              <button 
+                className={styles.nextButton}
+                onClick={() => setCurrentSlideIndex(prev => (prev + 1) % images.length)}
+              >
+                ›
+              </button>
+              <span className={styles.slideCounter}>
+                {currentSlideIndex + 1}/{images.length}
+              </span>
+            </div>
+          </div>
+
+          {/* 右側のコンテンツ */}
+          <div className={styles.rightContent}>
+            
+            <div className={styles.kimonoCollectionTitle}>
+              着物コレクション
+            </div>
+            {/* 2枚の小さな画像 */}
+            <div className={styles.smallImagesContainer}>
+              <div 
+                className={styles.smallImage}
+                style={{ backgroundImage: `url('${smallImage1}')` }}
               />
-            ))}
+              <div 
+                className={styles.smallImage}
+                style={{ backgroundImage: `url('${smallImage2}')` }}
+              />
+            </div>
           </div>
         </div>
       );
@@ -130,15 +136,11 @@ export default function Slide() {
   };
 
   return (
-    <Section id="slide">
+    <Section id="slide" className={styles.slideSection}>
       <div className={styles.slideRow}>
-        <h2 ref={titleRef} className={`${styles.slideTitle} sectionTitle`}>
-          {textanimate}
-        </h2>
         <div className={styles.slideContainer}>
           {renderSlideShow()}
         </div>
-
       </div>
     </Section>
   );
