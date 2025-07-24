@@ -54,16 +54,35 @@ export default function Slide() {
     };
   }, []);
 
+  // 初期表示時の可視性をチェック
+  const [isInitiallyVisible, setIsInitiallyVisible] = useState(false);
+  
+  useEffect(() => {
+    const checkInitialVisibility = () => {
+      if (titleRef.current) {
+        const rect = titleRef.current.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+        setIsInitiallyVisible(isVisible);
+      }
+    };
+
+    // 少し遅延させてDOMが確実に描画された後にチェック
+    const timer = setTimeout(checkInitialVisibility, 100);
+    return () => clearTimeout(timer);
+  }, []);
+
   // タイトルアニメーション完了を検知
   useEffect(() => {
     if (inView) {
+      // 初期表示で可視の場合は即座にアニメーション開始
+      const delay = isInitiallyVisible ? 0 : totalTitleDelay * 1000;
       const timer = setTimeout(() => {
         setTitleAnimationComplete(true);
-      }, totalTitleDelay * 1000);
+      }, delay);
 
       return () => clearTimeout(timer);
     }
-  }, [inView, totalTitleDelay]);
+  }, [inView, totalTitleDelay, isInitiallyVisible]);
 
 
   // スライドショーの自動切り替え

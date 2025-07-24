@@ -1,3 +1,32 @@
+/* Slideセクション用背景 - 和紙のツギハギ効果 */
+.aboutSection {
+  --bg-image: url('/background/about-image.jpg');
+  --bg-size: 100% 100%;
+  --bg-position: 0% 100%;
+  --bg-repeat: no-repeat;
+  --bg-opacity: 0.3;
+  
+  position: relative;
+  background: #ffffff;
+  padding: 3rem 0;
+  margin: 5% auto;
+}
+.aboutSection::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 17rem;
+  right: 0;
+  bottom: -3rem;
+  background-image: var(--bg-image);
+  background-size: var(--bg-size);
+  background-position: var(--bg-position);
+  background-repeat: var(--bg-repeat);
+  opacity: var(--bg-opacity);
+  pointer-events: none;
+  z-index: 0;
+}
+
 .aboutRow {
   display: flex;
   align-items: flex-start;
@@ -5,9 +34,37 @@
 }
 
 @media (max-width: 768px) {
+  .aboutSection {
+    --bg-image: url('/background/about-image.jpg');
+    --bg-size: 100% 100%;
+    --bg-position: 0% 100%;
+    --bg-repeat: no-repeat;
+    --bg-opacity: 0.3;
+    
+    position: relative;
+    background: #ffffff;
+    padding: 3rem 0;
+    margin: 5% auto;
+  }
+  .aboutSection::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    right: 0;
+    bottom: 0;
+    background-image: var(--bg-image);
+    background-size: var(--bg-size);
+    background-position: var(--bg-position);
+    background-repeat: var(--bg-repeat);
+    opacity: var(--bg-opacity);
+    pointer-events: none;
+    z-index: 0;
+  }
+
   .aboutRow {
     flex-direction: column;
-    gap: 0.2rem;
+    margin: 0 4%;
     align-items: stretch;
     min-height: unset;
     height: auto;

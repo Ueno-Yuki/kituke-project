@@ -201,3 +201,44 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+/* マーカーアニメーション */
+.highlightText {
+  position: relative;
+  display: inline-block;
+}
+
+.highlightText::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0.1em;
+  width: 0;
+  height: 0.4em;
+  background: linear-gradient(90deg, #ffd700 0%, #ffed4e 100%);
+  z-index: -1;
+  transition: width 0.8s ease-in-out;
+  opacity: 0.7;
+}
+
+.highlightText.animate::after {
+  width: 100%;
+}
+
+@keyframes highlightMarker {
+  0% {
+    width: 0;
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    width: 100%;
+    opacity: 0.7;
+  }
+}
+
+.highlightText.animate::after {
+  animation: highlightMarker 0.8s ease-in-out forwards;
+}

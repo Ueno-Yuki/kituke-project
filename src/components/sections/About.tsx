@@ -1,5 +1,6 @@
 import Section from "../Section/Section";
 import styles from "../../styles/About.module.css";
+import animationStyles from "../../styles/Animation.module.css";
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -25,6 +26,8 @@ export default function About() {
   const textRef = useRef<HTMLDivElement>(null);
   const inView = useInView(titleRef, { once: true });
   const [showText, setShowText] = useState(false);
+  const [isInitiallyVisible, setIsInitiallyVisible] = useState(false);
+  const [showHighlight, setShowHighlight] = useState(false);
 
   // 追加: 768px以下かどうか
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -36,12 +39,29 @@ export default function About() {
   const extraDelay = 0.2; // タイトルが全て表示されてから内容が出るまでの待ち時間（秒）
   const totalDelay = (title.length - 1) * delayPerChar + duration + extraDelay;
 
+  // 初期表示時の可視性をチェック
+  useEffect(() => {
+    const checkInitialVisibility = () => {
+      if (titleRef.current) {
+        const rect = titleRef.current.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+        setIsInitiallyVisible(isVisible);
+      }
+    };
+
+    // 少し遅延させてDOMが確実に描画された後にチェック
+    const timer = setTimeout(checkInitialVisibility, 100);
+    return () => clearTimeout(timer);
+  }, []);
+
   useEffect(() => {
     if (inView) {
-      const timer = setTimeout(() => setShowText(true), totalDelay * 1000);
+      // 初期表示で可視の場合は即座にアニメーション開始
+      const delay = isInitiallyVisible ? 0 : totalDelay * 1000;
+      const timer = setTimeout(() => setShowText(true), delay);
       return () => clearTimeout(timer);
     }
-  }, [inView, totalDelay]);
+  }, [inView, totalDelay, isInitiallyVisible]);
 
   const textanimate = title.map((char, index) => (
     <motion.span
@@ -62,7 +82,13 @@ export default function About() {
           x: 0,
           y: 0,
           opacity: 1,
-          transition: { duration: 1.3 }
+          transition: { 
+            duration: 1.3,
+            onComplete: () => {
+              // スライドアニメーション完了後にマーカーアニメーション開始
+              setTimeout(() => setShowHighlight(true), 500);
+            }
+          }
         }
       }
     : {
@@ -70,12 +96,18 @@ export default function About() {
         onscreen: {
           x: 0,
           opacity: 1,
-          transition: { duration: 1.3 }
+          transition: { 
+            duration: 1.3,
+            onComplete: () => {
+              // スライドアニメーション完了後にマーカーアニメーション開始
+              setTimeout(() => setShowHighlight(true), 500);
+            }
+          }
         }
       };
 
   return (
-    <Section id="about">
+    <Section id="about" className={styles.aboutSection}>
       <div className={styles.aboutRow}>
         <h2 ref={titleRef} className={`${styles.aboutTitle} sectionTitle`}>
           {textanimate}
@@ -87,8 +119,17 @@ export default function About() {
           initial="offscreen"
           animate={showText ? "onscreen" : "offscreen"}
         >
-          千葉県在住着付師です。
-          もっと着物を日常に！着物は大変。苦しい。高い。そんな色々を吹き飛ばしもっと気楽に着ていただきたい。着る楽しさ。着せる喜び。着物の装いをお手伝いできる喜びをモットーに地域密着で活動させていただいてます。
+          <p>
+            千葉県在住着付師です。<br/>
+            もっと着物を日常に！着物は大変。苦しい。高い。<br/>
+            そんな色々を吹き飛ばしもっと気楽に着ていただきたい。
+          </p>
+          <p>
+            <span className={`${animationStyles.highlightText} ${showHighlight ? animationStyles.animate : ''}`}>
+              着る楽しさ。着せる喜び。
+            </span>
+          </p>
+          <p>着物の装いをお手伝いできる喜びをモットーに地域密着で活動させていただいてます。</p>
           <div className={styles.aboutSNS}>
             <a
               href="https://instagram.com/p/Ct0pKJ1vlwA/"

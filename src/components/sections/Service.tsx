@@ -24,6 +24,7 @@ export default function Service() {
   const textBlockRef = useRef<HTMLDivElement>(null);
   const inView = useInView(titleRef, { once: true });
   const [showText, setShowText] = useState(false);
+  const [isInitiallyVisible, setIsInitiallyVisible] = useState(false);
 
   // 追加: 768px以下かどうか
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -35,12 +36,29 @@ export default function Service() {
   const extraDelay = 0.2; // タイトルが全て表示されてから内容が出るまでの待ち時間（秒）
   const totalDelay = (title.length - 1) * delayPerChar + duration + extraDelay;
 
+  // 初期表示時の可視性をチェック
+  useEffect(() => {
+    const checkInitialVisibility = () => {
+      if (titleRef.current) {
+        const rect = titleRef.current.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+        setIsInitiallyVisible(isVisible);
+      }
+    };
+
+    // 少し遅延させてDOMが確実に描画された後にチェック
+    const timer = setTimeout(checkInitialVisibility, 100);
+    return () => clearTimeout(timer);
+  }, []);
+
   useEffect(() => {
     if (inView) {
-      const timer = setTimeout(() => setShowText(true), totalDelay * 1000);
+      // 初期表示で可視の場合は即座にアニメーション開始
+      const delay = isInitiallyVisible ? 0 : totalDelay * 1000;
+      const timer = setTimeout(() => setShowText(true), delay);
       return () => clearTimeout(timer);
     }
-  }, [inView, totalDelay]);
+  }, [inView, totalDelay, isInitiallyVisible]);
 
   const textanimate = title.map((char, index) => (
     <motion.span
@@ -74,7 +92,7 @@ export default function Service() {
       };
 
   return (
-    <Section id="service">
+    <Section id="service" style={{ margin: '0', padding: '0', maxWidth: 'none', width: '100vw' }}>
       <div className={styles.serviceRow}>
         <h2 ref={titleRef} className={`${styles.serviceTitle} sectionTitle`}>
           {textanimate}

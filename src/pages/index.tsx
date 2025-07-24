@@ -4,7 +4,7 @@ import MainVisual from "@/components/sections/MainVisual";
 import Slide from "@/components/sections/Slide";
 import About from "@/components/sections/About";
 import Service from "@/components/sections/Service";
-import HamburgerMenuButton from "@/components/ThemeToggle";
+import HamburgerMenu from "@/components/HamburgerMenu";
 import BackToTop from "@/components/BackToTop";
 import ScrollAnimation from "@/components/ScrollAnimation";
 
@@ -19,7 +19,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ScrollAnimation />
-      <HamburgerMenuButton menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+      <HamburgerMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       <main>
         <MainVisual />
         <Slide />

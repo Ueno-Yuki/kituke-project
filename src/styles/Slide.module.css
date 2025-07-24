@@ -1,7 +1,7 @@
 /* Slideセクション用背景 - 和紙のツギハギ効果 */
 .slideSection {
   --bg-image: url('/background/slide-image.jpg');
-  --bg-size: 50% 100%;
+  --bg-size: 100% 100%;
   --bg-position: 100% 0%;
   --bg-repeat: no-repeat;
   --bg-opacity: 0.3;
@@ -9,16 +9,16 @@
   position: relative;
   background: #ffffff;
   padding: 3rem 0;
-  margin: 5% 13%;
+  margin: 5% auto;
 }
 
 .slideSection::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: -4.7rem;
+  left: -10rem;
+  right: 30rem;
+  bottom: -4.7rem;
   background-image: var(--bg-image);
   background-size: var(--bg-size);
   background-position: var(--bg-position);
@@ -201,6 +201,35 @@
 
 /* モバイル対応 */
 @media (max-width: 768px) {
+  .slideSection {
+    --bg-image: url('/background/slide-image.jpg');
+    --bg-size: 100% 100%;
+    --bg-position: 100% 0%;
+    --bg-repeat: no-repeat;
+    --bg-opacity: 0.3;
+    
+    position: relative;
+    background: #ffffff;
+    padding: 3rem 0;
+    margin: 5% auto;
+  }
+  
+  .slideSection::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 25%;
+    bottom: 0;
+    background-image: var(--bg-image);
+    background-size: var(--bg-size);
+    background-position: var(--bg-position);
+    background-repeat: var(--bg-repeat);
+    opacity: var(--bg-opacity);
+    pointer-events: none;
+    z-index: 0;
+  }
+
   .slideLayout {
     flex-direction: column;
     height: auto;

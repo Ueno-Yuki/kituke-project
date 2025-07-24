@@ -2,8 +2,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import styles from "../styles/HamburgerMenu.module.css";
 
 interface HamburgerMenuProps {
-  open: boolean;
-  onClose: () => void;
+  menuOpen: boolean;
+  setMenuOpen: (open: boolean) => void;
 }
 
 const sections = [
@@ -13,11 +13,11 @@ const sections = [
   // 必要に応じて追加
 ];
 
-export default function HamburgerMenu({ open, onClose }: HamburgerMenuProps) {
+export default function HamburgerMenu({ menuOpen, setMenuOpen }: HamburgerMenuProps) {
   // スクロール＋メニュー閉じ
   const handleSectionClick = (id: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    onClose();
+    setMenuOpen(false);
     setTimeout(() => {
       const el = document.getElementById(id);
       if (el) {
@@ -27,26 +27,42 @@ export default function HamburgerMenu({ open, onClose }: HamburgerMenuProps) {
   };
 
   return (
-    <AnimatePresence>
-      {open && (
-        <motion.nav
-          className={styles.menu}
-          initial={{ x: "100%" }}
-          animate={{ x: 0 }}
-          exit={{ x: "100%" }}
-          transition={{ type: "tween", duration: 0.2 }}
+    <>
+      <button
+        className={styles.hamburger}
+        aria-label={menuOpen ? "メニューを閉じる" : "メニューを開く"}
+        onClick={() => setMenuOpen(!menuOpen)}
+      >
+        <span
+          className={
+            styles["material-symbols"] + " " + styles.hamburgerIcon + (menuOpen ? " " + styles.open : "")
+          }
         >
-          <ul className={styles.sectionList}>
-            {sections.map((section) => (
-              <li key={section.id}>
-                <a href={`#${section.id}`} onClick={handleSectionClick(section.id)}>
-                  {section.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </motion.nav>
-      )}
-    </AnimatePresence>
+          {menuOpen ? "close" : "menu"}
+        </span>
+      </button>
+      
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.nav
+            className={styles.menu}
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "tween", duration: 0.2 }}
+          >
+            <ul className={styles.sectionList}>
+              {sections.map((section) => (
+                <li key={section.id}>
+                  <a href={`#${section.id}`} onClick={handleSectionClick(section.id)}>
+                    {section.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </motion.nav>
+        )}
+      </AnimatePresence>
+    </>
   );
 } 
