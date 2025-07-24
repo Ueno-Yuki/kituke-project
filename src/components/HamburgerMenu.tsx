@@ -1,5 +1,3 @@
-import { useContext } from "react";
-import { ThemeContext } from "@/pages/_app";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "../styles/HamburgerMenu.module.css";
 
@@ -16,10 +14,6 @@ const sections = [
 ];
 
 export default function HamburgerMenu({ open, onClose }: HamburgerMenuProps) {
-  const { theme } = useContext(ThemeContext);
-  // テーマ反転
-  const menuTheme = theme === "dark" ? "light" : "dark";
-
   // スクロール＋メニュー閉じ
   const handleSectionClick = (id: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -36,7 +30,7 @@ export default function HamburgerMenu({ open, onClose }: HamburgerMenuProps) {
     <AnimatePresence>
       {open && (
         <motion.nav
-          className={styles.menu + " " + styles[menuTheme]}
+          className={styles.menu}
           initial={{ x: "100%" }}
           animate={{ x: 0 }}
           exit={{ x: "100%" }}

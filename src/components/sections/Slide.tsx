@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Section from "../Section/Section";
 import animationStyles from "../../styles/Animation.module.css";
 import styles from "../../styles/Slide.module.css";
+import { motion, useInView } from "framer-motion";
 
 const defaultImages = {
   desktop: ['/pc/hero01.jpg'],
@@ -9,9 +10,18 @@ const defaultImages = {
 };
 
 export default function Slide() {
+  const titleRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(titleRef, { once: true });
   const [availableImages, setAvailableImages] = useState(defaultImages);
   const [isMobile, setIsMobile] = useState(false);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const [titleAnimationComplete, setTitleAnimationComplete] = useState(false);
+
+  // タイトルアニメーション設定
+  const titleText = "着物コレクション";
+  const duration = 0.8;
+  const delayPerChar = 0.08;
+  const totalTitleDelay = titleText.length * delayPerChar + duration;
 
   useEffect(() => {
     const loadImagesList = async () => {
@@ -43,6 +53,17 @@ export default function Slide() {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
+  // タイトルアニメーション完了を検知
+  useEffect(() => {
+    if (inView) {
+      const timer = setTimeout(() => {
+        setTitleAnimationComplete(true);
+      }, totalTitleDelay * 1000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [inView, totalTitleDelay]);
 
 
   // スライドショーの自動切り替え
@@ -88,7 +109,12 @@ export default function Slide() {
       return (
         <div className={styles.slideLayout}>
           {/* 左側の大きな画像とコントロール */}
-          <div className={styles.mainImageSection}>
+          <motion.div 
+            className={styles.mainImageSection}
+            initial={{ opacity: 0, x: -50 }}
+            animate={titleAnimationComplete ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
             <div 
               className={styles.mainImage}
               style={{ backgroundImage: `url('${currentMainImage}')` }}
@@ -110,16 +136,37 @@ export default function Slide() {
                 {currentSlideIndex + 1}/{images.length}
               </span>
             </div>
-          </div>
+          </motion.div>
 
           {/* 右側のコンテンツ */}
           <div className={styles.rightContent}>
             
-            <div className={styles.kimonoCollectionTitle}>
-              着物コレクション
+            {/* セクションタイトル */}
+            <div ref={titleRef} className={styles.kimonoCollectionTitle}>
+              {titleText.split('').map((char, index) => (
+                <motion.span
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  transition={{ 
+                    duration: duration, 
+                    delay: index * delayPerChar,
+                    ease: "easeOut"
+                  }}
+                  style={{ display: 'inline-block' }}
+                >
+                  {char}
+                </motion.span>
+              ))}
             </div>
+            
             {/* 2枚の小さな画像 */}
-            <div className={styles.smallImagesContainer}>
+            <motion.div 
+              className={styles.smallImagesContainer}
+              initial={{ opacity: 0, y: 30 }}
+              animate={titleAnimationComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            >
               <div 
                 className={styles.smallImage}
                 style={{ backgroundImage: `url('${smallImage1}')` }}
@@ -128,7 +175,7 @@ export default function Slide() {
                 className={styles.smallImage}
                 style={{ backgroundImage: `url('${smallImage2}')` }}
               />
-            </div>
+            </motion.div>
           </div>
         </div>
       );

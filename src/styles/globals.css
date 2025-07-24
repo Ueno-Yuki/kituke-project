@@ -3,23 +3,6 @@
   --foreground: #171717;
 }
 
-body[data-theme="dark"] {
-  --background: #181a1b;
-  --foreground: #c9c9c9;
-}
-
-body[data-theme="light"] {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 html,
 body,
 main {
@@ -45,11 +28,6 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-}
 
 .sectionTitle {
   font-size: 2.2rem;

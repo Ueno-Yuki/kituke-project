@@ -153,10 +153,6 @@
   transition: transform 0.3s ease;
 }
 
-.smallImage:hover {
-  transform: scale(1.02);
-}
-
 /* 着物コレクションタイトル部分 */
 .kimonoCollection {
   height: 13%;

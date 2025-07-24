@@ -8,21 +8,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.3s, color 0.3s;
-}
-
-.menu.light {
   background: #fff;
   color: #171717;
-}
-
-.menu.dark {
-  background: #171717;
-  color: #fff;
-}
-.menu.dark .sectionList,
-.menu.dark .sectionList a {
-  color: #fff !important;
 }
 
 .sectionList {

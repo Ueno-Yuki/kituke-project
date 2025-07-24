@@ -1,25 +1,8 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import { createContext, useContext, useEffect, useState } from "react";
-import animationStyles from "../styles/Animation.module.css";
-
-// テーマ用コンテキスト
-export const ThemeContext = createContext({
-  theme: "light",
-  setTheme: (_: string) => {},
-});
+import { useEffect } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
-  const [theme, setTheme] = useState("light");
-
-  useEffect(() => {
-    let applied = theme;
-    if (theme === "system") {
-      applied = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    }
-    document.body.setAttribute("data-theme", applied);
-  }, [theme]);
-
   // スクロール位置の保存・復元
   useEffect(() => {
     const saveScroll = () => {
@@ -41,13 +24,8 @@ export default function App({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
-      <main
-        className={animationStyles.themeTransition}
-        style={{ background: "var(--background)", color: "var(--foreground)", minHeight: "100vh" }}
-      >
-        <Component {...pageProps} />
-      </main>
-    </ThemeContext.Provider>
+    <main style={{ minHeight: "100vh" }}>
+      <Component {...pageProps} />
+    </main>
   );
 }
