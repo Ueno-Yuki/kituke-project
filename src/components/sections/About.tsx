@@ -58,7 +58,11 @@ export default function About() {
     if (inView) {
       // 初期表示で可視の場合は即座にアニメーション開始
       const delay = isInitiallyVisible ? 0 : totalDelay * 1000;
-      const timer = setTimeout(() => setShowText(true), delay);
+      const timer = setTimeout(() => {
+        setShowText(true);
+        // テキストアニメーション後にハイライトアニメーション開始
+        setTimeout(() => setShowHighlight(true), 1800); // 1.3s + 0.5s
+      }, delay);
       return () => clearTimeout(timer);
     }
   }, [inView, totalDelay, isInitiallyVisible]);
@@ -82,13 +86,7 @@ export default function About() {
           x: 0,
           y: 0,
           opacity: 1,
-          transition: { 
-            duration: 1.3,
-            onComplete: () => {
-              // スライドアニメーション完了後にマーカーアニメーション開始
-              setTimeout(() => setShowHighlight(true), 500);
-            }
-          }
+          transition: { duration: 1.3 }
         }
       }
     : {
@@ -96,13 +94,7 @@ export default function About() {
         onscreen: {
           x: 0,
           opacity: 1,
-          transition: { 
-            duration: 1.3,
-            onComplete: () => {
-              // スライドアニメーション完了後にマーカーアニメーション開始
-              setTimeout(() => setShowHighlight(true), 500);
-            }
-          }
+          transition: { duration: 1.3 }
         }
       };
 

@@ -25,6 +25,7 @@ export default function Service() {
   const inView = useInView(titleRef, { once: true });
   const [showText, setShowText] = useState(false);
   const [isInitiallyVisible, setIsInitiallyVisible] = useState(false);
+  const [showCards, setShowCards] = useState<boolean[]>(new Array(8).fill(false));
 
   // 追加: 768px以下かどうか
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -55,10 +56,16 @@ export default function Service() {
     if (inView) {
       // 初期表示で可視の場合は即座にアニメーション開始
       const delay = isInitiallyVisible ? 0 : totalDelay * 1000;
-      const timer = setTimeout(() => setShowText(true), delay);
+      const timer = setTimeout(() => {
+        setShowText(true);
+        // グリッドアニメーション開始（全カード同時表示）
+        setTimeout(() => {
+          setShowCards(new Array(8).fill(true)); // 全てのカードを同時にtrue
+        }, 500); // テキスト表示後500ms遅延
+      }, delay);
       return () => clearTimeout(timer);
     }
-  }, [inView, totalDelay, isInitiallyVisible]);
+  }, [inView, totalDelay, isInitiallyVisible, showCards]);
 
   const textanimate = title.map((char, index) => (
     <motion.span
@@ -97,56 +104,69 @@ export default function Service() {
         <h2 ref={titleRef} className={`${styles.serviceTitle} sectionTitle`}>
           {textanimate}
         </h2>
-        <motion.div
+        <div
           ref={textBlockRef}
           className={styles.serviceText}
-          variants={textVariants}
-          initial="offscreen"
-          animate={showText ? "onscreen" : "offscreen"}
         >
           <div className={styles.serviceGrid}>
             <div className={`${styles.serviceCard} ${styles.seijinshiki}`}>
-              <div className={styles.cardOverlay}>
-                <span className={styles.serviceTitle}>成人式</span>
+              <div className={`${animationStyles.slideReveal} ${showCards[0] ? animationStyles.animate : ''}`}>
+                <div className={styles.cardOverlay}>
+                  <span className={styles.serviceTitle}>成人式</span>
+                </div>
               </div>
             </div>
             <div className={`${styles.serviceCard} ${styles.sotsugyoushiki}`}>
-              <div className={styles.cardOverlay}>
-                <span className={styles.serviceTitle}>卒業式</span>
+              <div className={`${animationStyles.slideReveal} ${showCards[1] ? animationStyles.animate : ''}`}>
+                <div className={styles.cardOverlay}>
+                  <span className={styles.serviceTitle}>卒業式</span>
+                </div>
               </div>
             </div>
             <div className={`${styles.serviceCard} ${styles.shichigosan}`}>
-              <div className={styles.cardOverlay}>
-                <span className={styles.serviceTitle}>七五三</span>
+              <div className={`${animationStyles.slideReveal} ${showCards[2] ? animationStyles.animate : ''}`}>
+                <div className={styles.cardOverlay}>
+                  <span className={styles.serviceTitle}>七五三</span>
+                </div>
               </div>
             </div>
             <div className={`${styles.serviceCard} ${styles.yukata}`}>
-              <div className={styles.cardOverlay}>
-                <span className={styles.serviceTitle}>浴衣</span>
+              <div className={`${animationStyles.slideReveal} ${showCards[3] ? animationStyles.animate : ''}`}>
+                <div className={styles.cardOverlay}>
+                  <span className={styles.serviceTitle}>浴衣</span>
+                </div>
               </div>
             </div>
             <div className={`${styles.serviceCard} ${styles.hurisode}`}>
-              <div className={styles.cardOverlay}>
-                <span className={styles.serviceTitle}>振袖</span>
+              <div className={`${animationStyles.slideReveal} ${showCards[4] ? animationStyles.animate : ''}`}>
+                <div className={styles.cardOverlay}>
+                  <span className={styles.serviceTitle}>振袖</span>
+                </div>
               </div>
             </div>
             <div className={`${styles.serviceCard} ${styles.tomesode}`}>
-              <div className={styles.cardOverlay}>
-                <span className={styles.serviceTitle}>留袖</span>
+              <div className={`${animationStyles.slideReveal} ${showCards[5] ? animationStyles.animate : ''}`}>
+                <div className={styles.cardOverlay}>
+                  <span className={styles.serviceTitle}>留袖</span>
+                </div>
               </div>
             </div>
             <div className={`${styles.serviceCard} ${styles.omiyamairi}`}>
-              <div className={styles.cardOverlay}>
-                <span className={styles.serviceTitle}>お宮参り</span>
+              <div className={`${animationStyles.slideReveal} ${showCards[6] ? animationStyles.animate : ''}`}>
+                <div className={styles.cardOverlay}>
+                  <span className={styles.serviceTitle}>お宮参り</span>
+                </div>
               </div>
             </div>
-            <div className={styles.serviceCard}>
-              <div className={styles.cardOverlay}>
-                <span className={`${styles.serviceTitle} ${styles.houmon}`}>出張/訪問</span>
+            <div className={`${styles.serviceCard} ${styles.houmon}`}>
+              <div className={`${animationStyles.slideReveal} ${showCards[7] ? animationStyles.animate : ''}`}>
+                <div className={styles.cardOverlay}>
+                  <span className={styles.serviceTitle}>出張/訪問</span>
+                </div>
               </div>
             </div>
-          </div>
-        </motion.div>
+            </div>
+        </div>
       </div>
     </Section>
   );

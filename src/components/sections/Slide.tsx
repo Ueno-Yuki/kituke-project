@@ -97,7 +97,7 @@ export default function Slide() {
           // デスクトップ：3枚表示なので調整
           setCurrentSlideIndex(prev => (prev + 1) % (images.length > 3 ? images.length - 2 : images.length));
         }
-      }, 4000);
+      }, 7000);
 
       return () => clearInterval(slideInterval);
     }
@@ -110,14 +110,52 @@ export default function Slide() {
       // モバイル：1枚ずつ表示
       const currentImage = images[currentSlideIndex % images.length];
       return (
-        <div className={animationStyles.mobileSlideContainer}>
-          <div
-            className={animationStyles.mobileSlideImage}
-            style={{
-              backgroundImage: `url('${currentImage}')`,
-            }}
-          />
-        </div>
+        <>
+          {/* セクションタイトル */}
+          <div ref={titleRef} className={styles.kimonoCollectionTitle} style={{ marginBottom: '1rem', textAlign: 'center' }}>
+            {titleText.split('').map((char, index) => (
+              <motion.span
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ 
+                  duration: duration, 
+                  delay: index * delayPerChar,
+                  ease: "easeOut"
+                }}
+                style={{ display: 'inline-block' }}
+              >
+                {char}
+              </motion.span>
+            ))}
+          </div>
+          <div className={animationStyles.mobileSlideContainer}>
+            <div
+              className={`${animationStyles.slideContainer} ${animationStyles.slideAnimate}`}
+              style={{
+                '--slide-bg-image': `url('${currentImage}')`
+              } as React.CSSProperties}
+              key={currentSlideIndex}
+            />
+          </div>
+          <div className={styles.slideControls}>
+            <button 
+              className={styles.prevButton}
+              onClick={() => setCurrentSlideIndex(prev => prev === 0 ? images.length - 1 : prev - 1)}
+            >
+              ‹
+            </button>
+            <button 
+              className={styles.nextButton}
+              onClick={() => setCurrentSlideIndex(prev => (prev + 1) % images.length)}
+            >
+              ›
+            </button>
+            <span className={styles.slideCounter}>
+              {currentSlideIndex + 1}/{images.length}
+            </span>
+          </div>
+        </>
       );
     } else {
       // デスクトップ：新しい構造 - 左側大きな画像、右側2枚の小さな画像
@@ -135,8 +173,11 @@ export default function Slide() {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <div 
-              className={styles.mainImage}
-              style={{ backgroundImage: `url('${currentMainImage}')` }}
+              className={`${styles.mainImage} ${animationStyles.slideContainer} ${animationStyles.slideAnimate}`}
+              style={{
+                '--slide-bg-image': `url('${currentMainImage}')`
+              } as React.CSSProperties}
+              key={currentSlideIndex}
             />
             <div className={styles.slideControls}>
               <button 

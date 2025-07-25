@@ -1,17 +1,15 @@
-/* Slideセクション用背景 - 和紙のツギハギ効果 */
+/* Slideセクション用背景 */
 .slideSection {
   --bg-image: url('/background/slide-image.jpg');
   --bg-size: 100% 100%;
   --bg-position: 100% 0%;
   --bg-repeat: no-repeat;
   --bg-opacity: 0.3;
-  
   position: relative;
   background: #ffffff;
   padding: 3rem 0;
   margin: 5% auto;
 }
-
 .slideSection::before {
   content: '';
   position: absolute;
@@ -28,22 +26,6 @@
   z-index: 0;
 }
 
-/* 和紙の質感を追加 */
-.slideSection::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(circle at 15% 20%, rgba(245, 240, 235, 0.4) 0%, transparent 40%),
-    radial-gradient(circle at 80% 60%, rgba(250, 245, 240, 0.3) 0%, transparent 35%),
-    radial-gradient(circle at 45% 80%, rgba(248, 243, 238, 0.3) 0%, transparent 30%);
-  pointer-events: none;
-  z-index: 1;
-}
-
 /* スライドセクション全体 */
 .slideRow {
   width: 100%;
@@ -54,14 +36,6 @@
   z-index: 2;
 }
 
-/* PC版新レイアウト */
-.slideLayout {
-  display: flex;
-  gap: 2rem;
-  height: 500px;
-  width: 100%;
-}
-
 /* 左側メイン画像セクション */
 .mainImageSection {
   flex: 1;
@@ -69,7 +43,6 @@
   height: 100%;
   width: 100%;
 }
-
 .mainImage {
   width: 100%;
   height: 100%;
@@ -90,7 +63,6 @@
   align-items: center;
   padding: 0.5rem 1rem;
 }
-
 .prevButton,
 .nextButton {
   background: #b48a78;
@@ -103,13 +75,11 @@
   font-size: 2.5rem;
   transition: all 0.3s ease;
 }
-
 .prevButton:hover,
 .nextButton:hover {
   background: #9a7866;
   transform: scale(1.1);
 }
-
 .slideCounter {
   font-size: 1.3rem;
   color: #333;
@@ -124,18 +94,6 @@
   height: 100%;
 }
 
-/* 縦書きタイトル */
-.verticalTitle {
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #333;
-  letter-spacing: 0.1em;
-  text-align: center;
-  padding: 1rem 0;
-}
-
 /* 小さな画像コンテナ */
 .smallImagesContainer {
   display: flex;
@@ -143,7 +101,6 @@
   gap: 1rem;
   flex: 1;
 }
-
 .smallImage {
   height: calc(50% - 0.5rem);
   background-size: cover;
@@ -159,7 +116,6 @@
   border-radius: 8px;
   white-space: nowrap;
 }
-
 .kimonoCollectionTitle {
   font-size: 2rem;
   color: #7a5c3e;
@@ -171,26 +127,6 @@
   top: -15%;
 }
 
-.styleButton {
-  background: #b48a78;
-  color: white;
-  border: none;
-  padding: 0.8rem 1.5rem;
-  border-radius: 25px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-align: center;
-}
-
-.styleButton:hover {
-  background: #9a7866;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-
 /* PC版新レイアウト */
 .slideLayout {
   display: flex;
@@ -201,19 +137,20 @@
 
 /* モバイル対応 */
 @media (max-width: 768px) {
+  .slideRow {
+    padding: 0;
+  }
   .slideSection {
     --bg-image: url('/background/slide-image.jpg');
     --bg-size: 100% 100%;
     --bg-position: 100% 0%;
     --bg-repeat: no-repeat;
     --bg-opacity: 0.3;
-    
     position: relative;
     background: #ffffff;
     padding: 3rem 0;
     margin: 5% auto;
   }
-  
   .slideSection::before {
     content: '';
     position: absolute;
@@ -229,13 +166,37 @@
     pointer-events: none;
     z-index: 0;
   }
-
   .slideLayout {
     flex-direction: column;
     height: auto;
     gap: 1rem;
   }
-  
+
+  /* スライドコントロール */
+  .slideControls {
+    position: static;
+    display: flex;
+    justify-content: center;
+    gap: 0.9em;
+    align-items: center;
+    padding: 1rem 0 0 0;
+  }
+  .prevButton,
+.nextButton {
+  background:hsl(7, 54.60%, 53.30%);
+  color: white;
+  border: none;
+  align-items: center;
+  cursor: pointer;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+.prevButton:hover,
+.nextButton:hover {
+  background: #9a7866;
+  transform: scale(1.1);
+}
+
   .mainImageSection {
     height: 250px;
   }
