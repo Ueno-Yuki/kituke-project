@@ -101,7 +101,7 @@ export default function Slide() {
 
       return () => clearInterval(slideInterval);
     }
-  }, [availableImages, isMobile]);
+  }, [availableImages, isMobile, currentSlideIndex]);
 
   const renderSlideShow = () => {
     const images = isMobile ? availableImages.mobile : availableImages.desktop;
