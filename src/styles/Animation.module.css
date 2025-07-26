@@ -1,4 +1,6 @@
-/* フェードインアニメーション */
+/* ===============================================
+   フェードインアニメーション
+   =============================================== */
 .fade {
   opacity: 0;
   transition: opacity 0.8s cubic-bezier(.4,0,.2,1);
@@ -6,8 +8,12 @@
 .fadeVisible {
   opacity: 1;
 }
+/* ===============================================
+   フェードインアニメーション END */
 
-/* 下からふわっと出てくるアニメーション */
+/* ===============================================
+   下からふわっと出てくるアニメーション
+   =============================================== */
 .fadeUp {
   opacity: 0;
   transform: translateY(40px);
@@ -17,20 +23,22 @@
   opacity: 1;
   transform: translateY(0);
 }
+/* ===============================================
+   下からふわっと出てくるアニメーション END */
 
 
-/* 文字が下から上に表示されるアニメーション */
+/* ===============================================
+   文字が下から上に表示されるアニメーション
+   =============================================== */
 .slideUpChar {
   display: inline-block;
   opacity: 0;
   transform: translateY(50px);
   animation: slideUpFade 0.2s ease-out forwards;
 }
-
 .slideUpChar.space {
   width: 0.3em;
 }
-
 @keyframes slideUpFade {
   0% {
     opacity: 0;
@@ -45,16 +53,9 @@
     transform: translateY(0);
   }
 }
+/* ===============================================
+   文字が下から上に表示されるアニメーション END */
 
-.titleContainer {
-  overflow: hidden;
-  line-height: 1.2;
-}
-
-.titleLine {
-  display: block;
-  margin-bottom: 0.5rem;
-}
 
 @media (max-width: 768px) {
   .titleLine:last-child {
@@ -62,11 +63,12 @@
   }
 }
 
-/* タイトルアニメーション完了後 */
+/* ===============================================
+   タイトルアニメーション完了後
+   =============================================== */
 .titleMoveUp {
   animation: moveUpAndShrink 1s ease-out forwards;
 }
-
 @keyframes moveUpAndShrink {
   0% {
     transform: translateY(0) scale(1);
@@ -77,7 +79,12 @@
     opacity: 0.8;
   }
 }
+/* ===============================================
+   タイトルアニメーション完了後 END */
 
+/* ===============================================
+   スライドショーアニメーション
+   =============================================== */
 .slideContainer {
   position: absolute;
   top: 0;
@@ -89,7 +96,16 @@
   animation: fadeInSlideShow 1s ease-out forwards;
   animation-delay: 0.5s;
 }
-
+@keyframes fadeInSlideShow {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
 .slideImage {
   position: absolute;
   top: 0;
@@ -102,18 +118,6 @@
   opacity: 0;
   animation: fadeSlide 12s infinite;
 }
-
-@keyframes fadeInSlideShow {
-  0% {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
 @keyframes fadeSlide {
   0% { opacity: 0; }
   8.33% { opacity: 1; }
@@ -121,81 +125,80 @@
   33.33% { opacity: 0; }
   100% { opacity: 0; }
 }
+/* ===============================================
+   スライドショーアニメーション END */
 
-  /* 3枚同時表示の長方形スライドショー */
-  .rectangleSlideContainer {
-    width: 80%;
-    height: 200px;
-    margin: 2rem auto 0;
-    border-radius: 12px;
+/* ===============================================
+   長方形スライドショー（3枚同時表示）
+   =============================================== */
+.rectangleSlideContainer {
+  width: 80%;
+  height: 200px;
+  margin: 2rem auto 0;
+  border-radius: 12px;
+  overflow: hidden;
+  opacity: 0;
+  animation: fadeInSlideShow 1s ease-out forwards;
+  animation-delay: 0.5s;
+}
+.slideWrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  gap: 2px;
+}
+.rectangleSlideImage {
+  flex: 1;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform 0.3s ease;
+}
+.rectangleSlideImage:hover {
+  transform: scale(1.05);
+  z-index: 2;
+}
+/* ===============================================
+   長方形スライドショー（3枚同時表示） END */
+
+/* モバイル対応 */
+@media (max-width: 768px) {
+  /* 1枚ずつ表示のスライドショー */
+  .mobileSlideContainer {
+    width: 90%;
+    height: 50vh;
+    margin: 1rem auto 0;
+    border-radius: 0;
     overflow: hidden;
-    opacity: 0;
-    animation: fadeInSlideShow 1s ease-out forwards;
-    animation-delay: 0.5s;
+    box-shadow: none;
+    position: relative;
   }
-
-  .slideWrapper {
-    display: flex;
+  .slideContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    gap: 2px;
+    overflow: hidden;
+    opacity: 0;
   }
-
-  .rectangleSlideImage {
-    flex: 1;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    transition: transform 0.3s ease;
+  .rectangleSlideContainer {
+    width: 90%;
+    height: 150px;
   }
-
-  .rectangleSlideImage:hover {
-    transform: scale(1.05);
-    z-index: 2;
+  .slideWrapper {
+    gap: 1px;
   }
+}
 
-  /* モバイル対応 */
-  @media (max-width: 768px) {
-    /* 1枚ずつ表示のスライドショー */
-    .mobileSlideContainer {
-      width: 90%;
-      height: 50vh;
-      margin: 1rem auto 0;
-      border-radius: 0;
-      overflow: hidden;
-      box-shadow: none;
-      position: relative;
-    }
-
-    .slideContainer {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      opacity: 0;
-    }
-
-    .rectangleSlideContainer {
-      width: 90%;
-      height: 150px;
-    }
-
-    .slideWrapper {
-      gap: 1px;
-    }
+/* タブレット対応 */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .rectangleSlideContainer {
+    width: 85%;
+    height: 180px;
   }
-
-  /* タブレット対応 */
-  @media (max-width: 1024px) and (min-width: 769px) {
-    .rectangleSlideContainer {
-      width: 85%;
-      height: 180px;
-    }
-  }
-
+}
 .mobileSlideImage {
   width: 100%;
   height: 100%;
@@ -204,7 +207,9 @@
   background-repeat: no-repeat;
 }
 
-/* マーカーアニメーション */
+/* ===============================================
+   マーカーアニメーション
+   =============================================== */
 .highlightText {
   position: relative;
   display: inline-block;
@@ -237,8 +242,12 @@
 .highlightText.animate::after {
   animation: highlightMarker 0.8s ease-in-out forwards;
 }
+/* ===============================================
+   マーカーアニメーション END */
 
-/* 左から右へスライドインアニメーション */
+/* ===============================================
+   左から右へスライドインアニメーション
+   =============================================== */
 .slideReveal {
   display: block;
   overflow: hidden;
@@ -281,8 +290,12 @@
     transform: translateX(100%);
   }
 }
+/* ===============================================
+   左から右へスライドインアニメーション END */
 
-/* 流れるようなスライドアニメーション（スライドショー用） */
+/* ===============================================
+   流れるようなスライドアニメーション（スライドショー用）
+   =============================================== */
 .slideContainer {
   position: relative;
   overflow: hidden;
@@ -327,8 +340,12 @@
     transform: scaleX(1) translateX(0);
   }
 }
+/* ===============================================
+   流れるようなスライドアニメーション（スライドショー用） END */
 
-/* フェードスライド用のコンテナ */
+/* ===============================================
+   フェードスライド用のコンテナ
+   =============================================== */
 .fadeSlideContainer {
   position: relative;
   overflow: hidden;
@@ -350,3 +367,5 @@
 .fadeSlideContainer .slideImage.active {
   opacity: 1;
 }
+/* ===============================================
+   フェードスライド用のコンテナ END */

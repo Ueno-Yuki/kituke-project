@@ -1,11 +1,12 @@
-/* Slideセクション用背景 - 和紙のツギハギ効果 */
+/* ===============================================
+   Aboutセクション用背景
+   =============================================== */
 .aboutSection {
   --bg-image: url('/background/about-image.jpg');
   --bg-size: 100% 100%;
   --bg-position: 0% 100%;
   --bg-repeat: no-repeat;
   --bg-opacity: 0.3;
-  
   position: relative;
   background: #ffffff;
   padding: 3rem 0;
@@ -26,13 +27,36 @@
   pointer-events: none;
   z-index: 0;
 }
+/* ===============================================
+   Aboutセクション用背景 END */
 
 .aboutRow {
   display: flex;
   align-items: flex-start;
   gap: 2rem;
 }
+.aboutTitle {
+  color: #7a5c3e;
+}
+.aboutText {
+  color: var(--foreground);
+  font-size: 1.4rem;
+  line-height: 2;
+  flex-basis: 70%;
+}
 
+/* ===============================================
+   タブレット用CSS
+   =============================================== */
+@media (max-width: 1076px) {
+  .aboutTitle {
+    padding-left: 5%;
+  }
+}
+
+/* ===============================================
+   モバイル用CSS
+   =============================================== */
 @media (max-width: 768px) {
   .aboutSection {
     --bg-image: url('/background/about-image.jpg');
@@ -40,7 +64,6 @@
     --bg-position: 0% 100%;
     --bg-repeat: no-repeat;
     --bg-opacity: 0.3;
-    
     position: relative;
     background: #ffffff;
     padding: 3rem 0;
@@ -75,6 +98,7 @@
     margin-bottom: 1em !important;
     font-size: 1.3rem;
     line-height: 1.2;
+    padding: 0;
   }
   .aboutText {
     flex-basis: auto;
@@ -84,15 +108,4 @@
   .aboutSNS {
     margin-top: 0;
   }
-}
-
-.aboutTitle {
-  color: #7a5c3e;
-}
-
-.aboutText {
-  color: var(--foreground);
-  font-size: 1.4rem;
-  line-height: 2;
-  flex-basis: 70%;
 } 

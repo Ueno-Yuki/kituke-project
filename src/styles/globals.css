@@ -3,8 +3,10 @@
   --foreground: #171717;
 }
 
-bode,html, main {
+body, html, main {
   overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -13,6 +15,7 @@ body {
   font-family: 'Shippori Mincho B1', serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
 }
 
 * {

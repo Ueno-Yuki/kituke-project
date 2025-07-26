@@ -29,8 +29,8 @@ export default function About() {
   const [isInitiallyVisible, setIsInitiallyVisible] = useState(false);
   const [showHighlight, setShowHighlight] = useState(false);
 
-  // 追加: 768px以下かどうか
-  const isMobile = useMediaQuery("(max-width: 768px)");
+  // 追加: 1076px以下かどうか
+  const isMobile = useMediaQuery("(max-width: 1076px)");
 
   const titles = "私について";
   const title = titles.split("");

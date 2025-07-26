@@ -1,3 +1,6 @@
+/* ===============================================
+   サービスセクション
+   =============================================== */
 .serviceTitle {
   color: #7a5c3e;
   text-align: center;
@@ -9,7 +12,9 @@
   line-height: 2;
 }
 
-/* カード内タイトル */
+/* ===============================================
+   カード内タイトル
+   =============================================== */
 .cardOverlay .serviceTitle {
   color: #ffffff;
   font-size: 1.2rem;
@@ -18,16 +23,20 @@
   letter-spacing: 0.05em;
 }
 
-/* グリッドレイアウト - 4列2行の均一配置 */
-.serviceGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  margin-bottom: 2rem;
-  height: 50rem;
-}
-
-/* 各サービス共通CSS */
+/* ===============================================
+   グリッドレイアウト - 4列2行の均一配置
+   =============================================== */
+   .serviceGrid {
+     display: grid;
+     grid-template-columns: repeat(4, 1fr);
+     grid-template-rows: repeat(2, 1fr);
+     margin-bottom: 2rem;
+     height: 50rem;
+    }
+    
+/* ===============================================
+    各サービス共通CSS
+   =============================================== */
 .serviceCard {
   position: relative;
   overflow: hidden;
@@ -108,6 +117,9 @@
   transition: background 0.6s ease, opacity 0.3s ease;
 }
 
+/* ===============================================
+   アニメーションに関わるCSS
+   =============================================== */
 /* アニメーション実行時にテキストを表示 */
 .serviceCard.animating .cardOverlay {
   animation: showText 1.2s cubic-bezier(0.8, 0, 0.17, 1) forwards;
@@ -120,7 +132,6 @@
     opacity: 1;
   }
 }
-
 /* アニメーション完了後の背景画像表示 */
 .serviceCard.animating::before {
   animation: showBackground 1.2s cubic-bezier(0.8, 0, 0.17, 1) forwards;
@@ -133,13 +144,16 @@
     opacity: 1;
   }
 }
-
 /* ホバー時はオーバーレイを薄くする */
 .serviceCard:hover .cardOverlay {
   background-color: transparent;
 }
+/* ===============================================
+   アニメーションに関わるCSS END */
 
-/* モバイル対応 */
+/* ===============================================
+   モバイル用CSS
+   =============================================== */
 @media (max-width: 768px) {
   .serviceRow {
     flex-direction: column;

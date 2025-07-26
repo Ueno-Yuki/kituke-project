@@ -1,4 +1,6 @@
-/* Slideセクション用背景 */
+/* ===============================================
+   Slideセクション用背景
+   =============================================== */
 .slideSection {
   --bg-image: url('/background/slide-image.jpg');
   --bg-size: 100% 100%;
@@ -8,12 +10,12 @@
   position: relative;
   background: #ffffff;
   padding: 3rem 0;
-  margin: 5% auto;
+  margin: 0 auto 5% auto;
 }
 .slideSection::before {
   content: '';
   position: absolute;
-  top: -4.7rem;
+  top: 0;
   left: -10rem;
   right: 30rem;
   bottom: -4.7rem;
@@ -26,17 +28,21 @@
   z-index: 0;
 }
 
-/* スライドセクション全体 */
-.slideRow {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-  position: relative;
-  z-index: 2;
-}
-
-/* 左側メイン画像セクション */
+/* ===============================================
+   スライドセクション全体
+   =============================================== */
+   .slideRow {
+     width: 100%;
+     max-width: 1200px;
+     margin: 0 auto;
+     padding: 2rem 1rem;
+     position: relative;
+     z-index: 2;
+    }
+    
+/* ===============================================
+   左側メイン画像セクション
+   =============================================== */
 .mainImageSection {
   flex: 1;
   position: relative;
@@ -53,7 +59,9 @@
   overflow: hidden;
 }
 
-/* スライドコントロール */
+/* ===============================================
+   スライドコントロール
+   =============================================== */
 .slideControls {
   position: absolute;
   top: 2%;
@@ -86,14 +94,15 @@
   text-align: center;
 }
 
-/* 右側コンテンツ */
+/* ===============================================
+   右側コンテンツ
+   =============================================== */
 .rightContent {
   display: flex;
   flex-direction: column;
   gap: 3.5rem;
   height: 100%;
 }
-
 /* 小さな画像コンテナ */
 .smallImagesContainer {
   display: flex;
@@ -109,7 +118,6 @@
   border-radius: 6px;
   transition: transform 0.3s ease;
 }
-
 /* 着物コレクションタイトル部分 */
 .kimonoCollection {
   height: 13%;
@@ -124,9 +132,8 @@
   margin: 0;
   letter-spacing: 0.08em;
   position: relative;
-  top: -15%;
+  top: -10%;
 }
-
 /* PC版新レイアウト */
 .slideLayout {
   display: flex;
@@ -135,7 +142,9 @@
   width: 100%;
 }
 
-/* モバイル対応 */
+/* ===============================================
+   モバイル版
+   =============================================== */
 @media (max-width: 768px) {
   .slideRow {
     padding: 0;
@@ -149,7 +158,7 @@
     position: relative;
     background: #ffffff;
     padding: 3rem 0;
-    margin: 5% auto;
+    margin: 0 auto 5% auto;
   }
   .slideSection::before {
     content: '';
@@ -182,62 +191,18 @@
     padding: 1rem 0 0 0;
   }
   .prevButton,
-.nextButton {
-  background:hsl(7, 54.60%, 53.30%);
-  color: white;
-  border: none;
-  align-items: center;
-  cursor: pointer;
-  font-size: 1.5rem;
-  transition: all 0.3s ease;
-}
-.prevButton:hover,
-.nextButton:hover {
-  background: #9a7866;
-  transform: scale(1.1);
-}
-
-  .mainImageSection {
-    height: 250px;
-  }
-  
-  .rightContent {
-    flex: none;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-  
-  .verticalTitle {
-    writing-mode: horizontal-tb;
-    text-orientation: mixed;
-    flex: 1;
-    padding: 0.5rem;
+  .nextButton {
+    background:hsl(7, 54.60%, 53.30%);
+    color: white;
+    border: none;
+    align-items: center;
+    cursor: pointer;
     font-size: 1.5rem;
+    transition: all 0.3s ease;
   }
-  
-  .smallImagesContainer {
-    flex-direction: row;
-    height: 100px;
-    flex: 1;
-  }
-  
-  .smallImage {
-    height: 100%;
-    width: calc(50% - 0.5rem);
-  }
-  
-  .styleSection {
-    width: 100%;
-    padding: 1rem;
-  }
-
-  .slideTitle {
-    min-width: 0;
-    flex-basis: auto;
-    text-align: left;
-    margin-bottom: 0.5em !important;
-    font-size: 1.3rem;
-    line-height: 1.2;
+  .prevButton:hover,
+  .nextButton:hover {
+    background: #9a7866;
+    transform: scale(1.1);
   }
 }

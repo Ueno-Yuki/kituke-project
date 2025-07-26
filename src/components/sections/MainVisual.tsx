@@ -24,7 +24,7 @@ export default function MainVisual() {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
+      setIsMobile(window.innerWidth <= 1076);
     };
 
     handleResize();
