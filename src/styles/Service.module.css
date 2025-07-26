@@ -155,23 +155,12 @@
    モバイル用CSS
    =============================================== */
 @media (max-width: 768px) {
-  .serviceRow {
-    flex-direction: column;
-    gap: 0.2rem;
-    align-items: stretch;
-    min-height: unset;
-    height: auto;
-  }
   .serviceTitle {
     min-width: 0;
     flex-basis: auto;
     margin-bottom: 0.5em !important;
     font-size: 1.3rem;
     line-height: 1.2;
-  }
-  .serviceText {
-    font-size: 1.1rem !important;
-    line-height: 2.2 !important;
   }
   .serviceGrid {
     grid-template-columns: repeat(2, 1fr);

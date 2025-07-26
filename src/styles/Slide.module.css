@@ -55,7 +55,6 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  border-radius: 8px;
   overflow: hidden;
 }
 
@@ -115,7 +114,6 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  border-radius: 6px;
   transition: transform 0.3s ease;
 }
 /* 着物コレクションタイトル部分 */

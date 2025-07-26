@@ -21,7 +21,6 @@ function useMediaQuery(query: string): boolean {
 
 export default function Service() {
   const titleRef = useRef<HTMLHeadingElement>(null);
-  const textBlockRef = useRef<HTMLDivElement>(null);
   const serviceGridRef = useRef<HTMLDivElement>(null);
   const inView = useInView(titleRef, { once: true });
   const gridInView = useInView(serviceGridRef, { once: true });
@@ -86,26 +85,6 @@ export default function Service() {
     </motion.span>
   ));
 
-  // 画面幅でvariantsも切り替え（スマホ用はx:0も明示）
-  const textVariants = isMobile
-    ? {
-        offscreen: { x: 0, y: 40, opacity: 0 },
-        onscreen: {
-          x: 0,
-          y: 0,
-          opacity: 1,
-          transition: { duration: 1.3 }
-        }
-      }
-    : {
-        offscreen: { x: 200, opacity: 0 },
-        onscreen: {
-          x: 0,
-          opacity: 1,
-          transition: { duration: 1.3 }
-        }
-      };
-
   return (
     <Section id="service" style={{ margin: '0', padding: '0', maxWidth: 'none', width: '100vw' }}>
       <div className={styles.serviceRow}>
@@ -113,7 +92,6 @@ export default function Service() {
           {textanimate}
         </h2>
         <div
-          ref={textBlockRef}
           className={styles.serviceText}
         >
           <div 

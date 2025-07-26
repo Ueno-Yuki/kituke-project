@@ -16,6 +16,10 @@ export default function Slide() {
   const [isMobile, setIsMobile] = useState(false);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [titleAnimationComplete, setTitleAnimationComplete] = useState(false);
+  const [isManualControl, setIsManualControl] = useState(false);
+  const autoSlideIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [actualSlideIndex, setActualSlideIndex] = useState(0); // 拡張配列での実際の位置
 
   // タイトルアニメーション設定
   const titleText = "着物コレクション";
@@ -66,7 +70,6 @@ export default function Slide() {
       }
     };
 
-    // 少し遅延させてDOMが確実に描画された後にチェック
     const timer = setTimeout(checkInitialVisibility, 100);
     return () => clearTimeout(timer);
   }, []);
@@ -74,7 +77,6 @@ export default function Slide() {
   // タイトルアニメーション完了を検知
   useEffect(() => {
     if (inView) {
-      // 初期表示で可視の場合は即座にアニメーション開始
       const delay = isInitiallyVisible ? 0 : totalTitleDelay * 1000;
       const timer = setTimeout(() => {
         setTitleAnimationComplete(true);
@@ -84,24 +86,120 @@ export default function Slide() {
     }
   }, [inView, totalTitleDelay, isInitiallyVisible]);
 
+  // 自動スライドの管理
+  const startAutoSlide = () => {
+    if (autoSlideIntervalRef.current) {
+      clearInterval(autoSlideIntervalRef.current);
+    }
+    
+    const images = isMobile ? availableImages.mobile : availableImages.desktop;
+    autoSlideIntervalRef.current = setInterval(() => {
+      if (!isManualControl && !isTransitioning) {
+        setIsTransitioning(true);
+        setActualSlideIndex(prev => prev + 1);
+        
+        // アニメーション完了後にリセット判定
+        setTimeout(() => {
+          setActualSlideIndex(prev => {
+            if (prev >= images.length) {
+              // 最後の実画像を超えたら最初の実画像位置にリセット
+              setTimeout(() => {
+                setActualSlideIndex(0);
+              }, 0);
+              return images.length;
+            }
+            return prev;
+          });
+          setCurrentSlideIndex(prev => (prev + 1) % images.length);
+          setIsTransitioning(false);
+        }, 800);
+      }
+    }, 7000);
+  };
 
-  // スライドショーの自動切り替え
+  const stopAutoSlide = () => {
+    if (autoSlideIntervalRef.current) {
+      clearInterval(autoSlideIntervalRef.current);
+      autoSlideIntervalRef.current = null;
+    }
+  };
+
+  // 自動スライドの開始/停止
   useEffect(() => {
     const images = isMobile ? availableImages.mobile : availableImages.desktop;
-    if (images.length > 0) {
-      const slideInterval = setInterval(() => {
-        if (isMobile) {
-          // モバイル：全ての画像を順番に表示
-          setCurrentSlideIndex(prev => (prev + 1) % images.length);
-        } else {
-          // デスクトップ：3枚表示なので調整
-          setCurrentSlideIndex(prev => (prev + 1) % (images.length > 3 ? images.length - 2 : images.length));
-        }
-      }, 7000);
-
-      return () => clearInterval(slideInterval);
+    if (images.length > 1 && titleAnimationComplete) {
+      if (isManualControl) {
+        stopAutoSlide();
+      } else {
+        startAutoSlide();
+      }
     }
-  }, [availableImages, isMobile, currentSlideIndex]);
+
+    return () => stopAutoSlide();
+  }, [availableImages, isMobile, titleAnimationComplete, isManualControl]);
+
+  // 手動制御
+  const handlePrevious = () => {
+    if (isTransitioning) return;
+    
+    const images = isMobile ? availableImages.mobile : availableImages.desktop;
+    setIsManualControl(true);
+    setIsTransitioning(true);
+    
+    setActualSlideIndex(prev => prev - 1);
+    
+    // アニメーション完了後にリセット判定
+    setTimeout(() => {
+      setActualSlideIndex(prev => {
+        if (prev <= -1) {
+          // 最初の実画像より前に行ったら最後の実画像位置にリセット
+          setTimeout(() => {
+            setActualSlideIndex(images.length - 1);
+          }, 0);
+          return -1;
+        }
+        return prev;
+      });
+      setCurrentSlideIndex(prev => prev === 0 ? images.length - 1 : prev - 1);
+      setIsTransitioning(false);
+    }, 800);
+    
+    // 5秒後に自動再生に戻る
+    setTimeout(() => {
+      setIsManualControl(false);
+    }, 5000);
+  };
+
+  const handleNext = () => {
+    if (isTransitioning) return;
+    
+    const images = isMobile ? availableImages.mobile : availableImages.desktop;
+    setIsManualControl(true);
+    setIsTransitioning(true);
+    
+    setActualSlideIndex(prev => prev + 1);
+    
+    // アニメーション完了後にリセット判定
+    setTimeout(() => {
+      setActualSlideIndex(prev => {
+        if (prev >= images.length) {
+          // 最後の実画像を超えたら最初の実画像位置にリセット
+          setTimeout(() => {
+            setActualSlideIndex(0);
+          }, 0);
+          return images.length;
+        }
+        return prev;
+      });
+      setCurrentSlideIndex(prev => (prev + 1) % images.length);
+      setIsTransitioning(false);
+    }, 800);
+    
+    // 5秒後に自動再生に戻る
+    setTimeout(() => {
+      setIsManualControl(false);
+    }, 5000);
+  };
 
   const renderSlideShow = () => {
     const images = isMobile ? availableImages.mobile : availableImages.desktop;
@@ -141,13 +239,13 @@ export default function Slide() {
           <div className={styles.slideControls}>
             <button 
               className={styles.prevButton}
-              onClick={() => setCurrentSlideIndex(prev => prev === 0 ? images.length - 1 : prev - 1)}
+              onClick={handlePrevious}
             >
               ‹
             </button>
             <button 
               className={styles.nextButton}
-              onClick={() => setCurrentSlideIndex(prev => (prev + 1) % images.length)}
+              onClick={handleNext}
             >
               ›
             </button>
@@ -158,10 +256,53 @@ export default function Slide() {
         </>
       );
     } else {
-      // デスクトップ：新しい構造 - 左側大きな画像、右側2枚の小さな画像
-      const currentMainImage = images[currentSlideIndex % images.length];
-      const smallImage1 = images[(currentSlideIndex + 1) % images.length];
-      const smallImage2 = images[(currentSlideIndex + 2) % images.length];
+      // デスクトップ：水平スライドアニメーション
+      const imageCount = images.length;
+      
+      // 無限ループ用に画像を複製（smallImageのオフセットを考慮して前後に十分な数を追加）
+      const extendedImages = [
+        ...images, // 前の複製
+        ...images, // 実画像
+        ...images  // 後の複製
+      ];
+      const extendedImageCount = extendedImages.length;
+      
+      // 各コンテナのスタイル
+      const slideContainerStyle: React.CSSProperties = {
+        overflow: 'hidden',
+        position: 'relative',
+        width: '100%',
+        height: '100%',
+      };
+      
+      const slideWrapperStyle: React.CSSProperties = {
+        display: 'flex',
+        width: `${extendedImageCount * 100}%`,
+        height: '100%',
+        transform: `translateX(-${(imageCount + actualSlideIndex) * (100 / extendedImageCount)}%)`,
+        transition: isTransitioning ? 'transform 0.8s ease-in-out' : 'none',
+      };
+      
+      const slideItemStyle: React.CSSProperties = {
+        width: `${100 / extendedImageCount}%`,
+        height: '100%',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        flexShrink: 0,
+      };
+
+      // 小画像用のスタイル関数（mainImageと同じロジック + オフセット）
+      const getSmallImageStyle = (offset: number): React.CSSProperties => {
+        const smallImageIndex = imageCount + actualSlideIndex + offset;
+        return {
+          display: 'flex',
+          width: `${extendedImageCount * 100}%`,
+          height: '100%',
+          transform: `translateX(-${smallImageIndex * (100 / extendedImageCount)}%)`,
+          transition: isTransitioning ? 'transform 0.8s ease-in-out' : 'none',
+        };
+      };
       
       return (
         <div className={styles.slideLayout}>
@@ -172,28 +313,34 @@ export default function Slide() {
             animate={titleAnimationComplete ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <div 
-              className={`${styles.mainImage} ${animationStyles.slideContainer} ${animationStyles.slideAnimate}`}
-              style={{
-                '--slide-bg-image': `url('${currentMainImage}')`
-              } as React.CSSProperties}
-              key={currentSlideIndex}
-            />
+            <div className={styles.mainImage} style={slideContainerStyle}>
+              <div style={slideWrapperStyle}>
+                {extendedImages.map((image, index) => (
+                  <div 
+                    key={index}
+                    style={{
+                      ...slideItemStyle,
+                      backgroundImage: `url('${image}')`
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
             <div className={styles.slideControls}>
               <button 
                 className={styles.prevButton}
-                onClick={() => setCurrentSlideIndex(prev => prev === 0 ? images.length - 1 : prev - 1)}
+                onClick={handlePrevious}
               >
                 ‹
               </button>
               <button 
                 className={styles.nextButton}
-                onClick={() => setCurrentSlideIndex(prev => (prev + 1) % images.length)}
+                onClick={handleNext}
               >
                 ›
               </button>
               <span className={styles.slideCounter}>
-                {currentSlideIndex + 1}/{images.length}
+                {currentSlideIndex + 1}/{imageCount}
               </span>
             </div>
           </motion.div>
@@ -227,14 +374,32 @@ export default function Slide() {
               animate={titleAnimationComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             >
-              <div 
-                className={styles.smallImage}
-                style={{ backgroundImage: `url('${smallImage1}')` }}
-              />
-              <div 
-                className={styles.smallImage}
-                style={{ backgroundImage: `url('${smallImage2}')` }}
-              />
+              <div className={styles.smallImage} style={slideContainerStyle}>
+                <div style={getSmallImageStyle(1)}>
+                  {extendedImages.map((image, index) => (
+                    <div 
+                      key={index}
+                      style={{
+                        ...slideItemStyle,
+                        backgroundImage: `url('${image}')`
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+              <div className={styles.smallImage} style={slideContainerStyle}>
+                <div style={getSmallImageStyle(2)}>
+                  {extendedImages.map((image, index) => (
+                    <div 
+                      key={index}
+                      style={{
+                        ...slideItemStyle,
+                        backgroundImage: `url('${image}')`
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
             </motion.div>
           </div>
         </div>
