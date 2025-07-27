@@ -29,7 +29,7 @@ main {
 @media (max-width: 768px) {
   main {
     /* モバイルでは画像をより鮮明に表示 */
-    background-image: url('/background/base-mobile-image.jpg');
+    background-image: url('/background/base-mobile-image.png');
   }
 }
 
