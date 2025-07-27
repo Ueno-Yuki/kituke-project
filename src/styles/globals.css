@@ -11,6 +11,25 @@ body, html, main {
   padding: 0;
 }
 
+/* mainタグの台紙背景（最低優先度） */
+main {
+  background-image: url('/background/base-image.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll; /* モバイル互換性のためscrollに変更 */
+  position: relative;
+  z-index: 0; /* 最低z-index */
+  min-height: 100vh;
+}
+
+/* デスクトップでは固定背景を使用 */
+@media (min-width: 769px) {
+  main {
+    background-attachment: fixed;
+  }
+}
+
 body {
   color: var(--foreground);
   background: var(--background);

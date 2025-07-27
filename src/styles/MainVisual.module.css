@@ -1,7 +1,6 @@
 .mainVisual {
   width: 100vw;
-  height: 100dvh;
-  min-height: 100svh;
+  height: 100vh;
   min-height: 100vh;
   color: #181818;
   display: flex;
@@ -90,8 +89,8 @@
    =============================================== */
 @media (max-width: 768px) {
   .mainVisual {
-    min-height: 100dvh;
-    height: 100dvh;
+    min-height: 100vh;
+    height: 100vh;
   }
   .scroll {
     bottom: 30%;
