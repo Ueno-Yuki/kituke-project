@@ -1,23 +1,9 @@
-import Section from "../Section/Section";
+import SectionWrapper from "../Layout/SectionWrapper";
 import styles from "../../styles/Service.module.css";
 import animationStyles from "../../styles/Animation.module.css";
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
-
-// 追加: 画面幅を判定するカスタムフック
-function useMediaQuery(query: string): boolean {
-  const [matches, setMatches] = useState(false);
-  useEffect(() => {
-    const media = window.matchMedia(query);
-    if (media.matches !== matches) {
-      setMatches(media.matches);
-    }
-    const listener = () => setMatches(media.matches);
-    media.addEventListener("change", listener);
-    return () => media.removeEventListener("change", listener);
-  }, [matches, query]);
-  return matches;
-}
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 export default function Service() {
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -86,7 +72,7 @@ export default function Service() {
   ));
 
   return (
-    <Section id="service" style={{ margin: '0', padding: '0', maxWidth: 'none', width: '100vw' }}>
+    <SectionWrapper id="service" style={{ margin: '0', padding: '0', maxWidth: 'none', width: '100vw' }}>
       <div className={styles.serviceRow}>
         <h2 ref={titleRef} className={`${styles.serviceTitle} sectionTitle`}>
           {textanimate}
@@ -160,6 +146,6 @@ export default function Service() {
           </div>
         </div>
       </div>
-    </Section>
+    </SectionWrapper>
   );
 } 

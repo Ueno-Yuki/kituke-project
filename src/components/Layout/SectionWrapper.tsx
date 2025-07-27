@@ -1,20 +1,20 @@
 import { ReactNode } from "react";
-import { useRef } from "react";
 import styles from "../../styles/Section.module.css";
 
-interface SectionProps {
+interface SectionWrapperProps {
   children: ReactNode;
   className?: string;
   style?: React.CSSProperties;
   id?: string;
 }
 
-export default function Section({ children, className = "", style, id }: SectionProps) {
-  const ref = useRef(null);
-
+/**
+ * ページセクションのラッパーコンポーネント
+ * HTMLのsection要素に共通スタイルとpropsを提供
+ */
+export default function SectionWrapper({ children, className = "", style, id }: SectionWrapperProps) {
   return (
     <section
-      ref={ref}
       className={`${styles.section} ${className}`}
       style={style}
       id={id}
@@ -22,4 +22,4 @@ export default function Section({ children, className = "", style, id }: Section
       {children}
     </section>
   );
-} 
+}

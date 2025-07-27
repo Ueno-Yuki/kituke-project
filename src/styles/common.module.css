@@ -1,0 +1,132 @@
+/* ===============================================
+   共通変数とユーティリティ
+   =============================================== */
+
+:root {
+  /* ブレークポイント */
+  --mobile-max: 768px;
+  --tablet-max: 1024px;
+  
+  /* カラーパレット */
+  --primary-brown: #7a5c3e;
+  --secondary-brown: #b48a78;
+  --hover-brown: #9a7866;
+  --background-white: #ffffff;
+  --text-dark: #333;
+  
+  /* アニメーション時間 */
+  --animation-fast: 0.3s;
+  --animation-normal: 0.8s;
+  --animation-slow: 1.2s;
+  
+  /* トランジション */
+  --transition-smooth: all 0.3s ease;
+  --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* ===============================================
+   共通メディアクエリ mixins
+   =============================================== */
+
+/* モバイル用共通スタイル */
+.mobileOnly {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobileOnly {
+    display: block;
+  }
+  
+  .desktopOnly {
+    display: none;
+  }
+}
+
+/* タブレット用共通スタイル */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .tabletOnly {
+    display: block;
+  }
+}
+
+/* ===============================================
+   共通アニメーションクラス
+   =============================================== */
+
+.fadeIn {
+  opacity: 0;
+  transition: opacity var(--animation-normal) ease;
+}
+
+.fadeIn.visible {
+  opacity: 1;
+}
+
+.slideUp {
+  transform: translateY(40px);
+  opacity: 0;
+  transition: 
+    transform var(--animation-normal) cubic-bezier(.4,0,.2,1),
+    opacity var(--animation-normal) cubic-bezier(.4,0,.2,1);
+}
+
+.slideUp.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* ===============================================
+   共通レイアウトユーティリティ
+   =============================================== */
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.flexCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.textCenter {
+  text-align: center;
+}
+
+/* ===============================================
+   共通ボタンスタイル
+   =============================================== */
+
+.btnPrimary {
+  background: var(--secondary-brown);
+  color: var(--background-white);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  border-radius: 4px;
+}
+
+.btnPrimary:hover {
+  background: var(--hover-brown);
+  transform: translateY(-2px);
+}
+
+.btnCircle {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  transition: var(--transition-bounce);
+}
+
+.btnCircle:hover {
+  transform: scale(1.1);
+}

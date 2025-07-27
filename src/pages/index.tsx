@@ -4,9 +4,9 @@ import MainVisual from "@/components/sections/MainVisual";
 import Slide from "@/components/sections/Slide";
 import About from "@/components/sections/About";
 import Service from "@/components/sections/Service";
-import HamburgerMenu from "@/components/HamburgerMenu";
-import BackToTop from "@/components/BackToTop";
-import ScrollAnimation from "@/components/ScrollAnimation";
+import HamburgerMenu from "@/components/UI/HamburgerMenu";
+import BackToTop from "@/components/UI/BackToTop";
+import ScrollAnimation from "@/components/UI/ScrollAnimation";
 
 export default function Home() {
   const [ menuOpen, setMenuOpen ] = useState(false);
@@ -19,14 +19,18 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ScrollAnimation />
-      <HamburgerMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-      <main>
+      <nav role="navigation" aria-label="メインメニュー">
+        <HamburgerMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+      </nav>
+      <main role="main">
         <MainVisual />
         <Slide />
         <About />
         <Service />
       </main>
-      <BackToTop menuOpen={menuOpen} />
+      <aside role="complementary" aria-label="ページ内ナビゲーション">
+        <BackToTop menuOpen={menuOpen} />
+      </aside>
     </>
   );
 }

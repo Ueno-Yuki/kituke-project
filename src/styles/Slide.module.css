@@ -8,7 +8,7 @@
   --bg-repeat: no-repeat;
   --bg-opacity: 0.3;
   position: relative;
-  background: #ffffff;
+  background: var(--background-white);
   padding: 3rem 0;
   margin: 0 auto 5% auto;
 }
@@ -72,7 +72,7 @@
 }
 .prevButton,
 .nextButton {
-  background: #b48a78;
+  background: var(--secondary-brown);
   color: white;
   border: none;
   width: 3rem;
@@ -84,12 +84,12 @@
 }
 .prevButton:hover,
 .nextButton:hover {
-  background: #9a7866;
+  background: var(--hover-brown);
   transform: scale(1.1);
 }
 .slideCounter {
   font-size: 1.3rem;
-  color: #333;
+  color: var(--text-dark);
   text-align: center;
 }
 
@@ -124,7 +124,7 @@
 }
 .kimonoCollectionTitle {
   font-size: 2rem;
-  color: #7a5c3e;
+  color: var(--primary-brown);
   text-align: right;
   font-weight: bold;
   margin: 0;
@@ -154,7 +154,7 @@
     --bg-repeat: no-repeat;
     --bg-opacity: 0.3;
     position: relative;
-    background: #ffffff;
+    background: var(--background-white);
     padding: 3rem 0;
     margin: 0 auto 5% auto;
   }
@@ -200,7 +200,7 @@
   }
   .prevButton:hover,
   .nextButton:hover {
-    background: #9a7866;
+    background: var(--hover-brown);
     transform: scale(1.1);
   }
 }

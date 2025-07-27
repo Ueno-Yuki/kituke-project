@@ -1,25 +1,11 @@
-import Section from "../Section/Section";
+import SectionWrapper from "../Layout/SectionWrapper";
 import styles from "../../styles/About.module.css";
 import animationStyles from "../../styles/Animation.module.css";
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
-
-// 追加: 画面幅を判定するカスタムフック
-function useMediaQuery(query: string): boolean {
-  const [matches, setMatches] = useState(false);
-  useEffect(() => {
-    const media = window.matchMedia(query);
-    if (media.matches !== matches) {
-      setMatches(media.matches);
-    }
-    const listener = () => setMatches(media.matches);
-    media.addEventListener("change", listener);
-    return () => media.removeEventListener("change", listener);
-  }, [matches, query]);
-  return matches;
-}
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 export default function About() {
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -99,7 +85,7 @@ export default function About() {
       };
 
   return (
-    <Section id="about" className={styles.aboutSection}>
+    <SectionWrapper id="about" className={styles.aboutSection}>
       <div className={styles.aboutRow}>
         <h2 ref={titleRef} className={`${styles.aboutTitle} sectionTitle`}>
           {textanimate}
@@ -135,6 +121,6 @@ export default function About() {
           </div>
         </motion.div>
       </div>
-    </Section>
+    </SectionWrapper>
   );
 } 
