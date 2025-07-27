@@ -97,3 +97,24 @@
     bottom: 30%;
   }
 }
+
+/* ===============================================
+   横向きモバイル（iPhone14横向き等）用CSS
+   =============================================== */
+@media (max-width: 844px) and (max-height: 450px) and (orientation: landscape) {
+  .scroll {
+    right: 5%;  /* 右側に配置 */
+    bottom: 50%; /* 中央の高さ */
+    transform: translateY(50%); /* 垂直中央揃え */
+  }
+}
+
+/* 更に狭い横向き画面（iPhone SE横向き等）用 */
+@media (max-width: 736px) and (max-height: 414px) and (orientation: landscape) {
+  .scroll {
+    right: 3%;
+    bottom: 50%;
+    transform: translateY(50%);
+    font-size: 0.9rem; /* フォントサイズを少し小さく */
+  }
+}
