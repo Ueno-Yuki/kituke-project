@@ -16,8 +16,12 @@ const defaultImages: SlideImages = {
 export function useSlideImages() {
   const [availableImages, setAvailableImages] = useState<SlideImages>(defaultImages);
   const [isMobile, setIsMobile] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    // クライアント側でのみ実行
+    setIsClient(true);
+    
     const loadImagesList = async () => {
       try {
         const response = await fetch('/api/images');
@@ -53,6 +57,7 @@ export function useSlideImages() {
   return {
     availableImages,
     currentImages,
-    isMobile
+    isMobile,
+    isClient
   };
 }
