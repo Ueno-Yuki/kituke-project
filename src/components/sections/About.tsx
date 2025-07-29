@@ -110,7 +110,7 @@ export default function About() {
           <p>着物の装いをお手伝いできる喜びをモットーに地域密着で活動させていただいてます。</p>
           <div className={styles.aboutSNS}>
             <a
-              href="https://instagram.com/p/Ct0pKJ1vlwA/"
+              href="https://www.instagram.com/sakaiyukie1102?igsh=MXJic2JzMTY3bnU2&utm_source=qr"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"

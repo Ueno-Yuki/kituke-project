@@ -38,10 +38,12 @@ export default function Home() {
         <meta property="og:site_name" content="着付け師境" />
         <meta property="og:locale" content="ja_JP" />
         
-        {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="着付け師境 | 千葉・君津市・木更津市の出張着付けサービス" />
-        <meta name="twitter:description" content="千葉・君津市・木更津市の着付け師境。成人式・七五三・卒業式など出張着付けサービス。" />
+        {/* SNSリンク設定 */}
+        <meta name="instagram:url" content="https://www.instagram.com/sakaiyukie1102" />
+        <meta name="contact:instagram" content="https://www.instagram.com/sakaiyukie1102" />
+        
+        {/* OGPでInstagramにも対応 */}
+        <meta property="og:see_also" content="https://www.instagram.com/sakaiyukie1102" />
         
         {/* 構造化データ (JSON-LD) */}
         <script
@@ -175,7 +177,10 @@ export default function Home() {
                 "name": "着付け師境"
               },
               "foundingDate": "2020",
-              "slogan": "美しい着物姿を実現する出張着付けサービス"
+              "slogan": "美しい着物姿を実現する出張着付けサービス",
+              "sameAs": [
+                "https://www.instagram.com/sakaiyukie1102"
+              ]
             })
           }}
         />
