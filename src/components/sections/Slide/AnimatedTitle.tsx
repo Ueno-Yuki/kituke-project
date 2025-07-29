@@ -25,28 +25,56 @@ export default function AnimatedTitle({
 }: AnimatedTitleProps) {
   const [forceShow, setForceShow] = useState(false);
 
-  // 要素が画面内にあるがinViewが発火しない場合のフォールバック
+  // 要素が画面近くに来た時にフォールバックタイマー開始
   useEffect(() => {
     if (!inView && !forceShow) {
-      // 1秒後にフォールバック
-      const timer1 = setTimeout(() => {
+      const checkProximityAndStartTimer = () => {
         if (titleRef.current) {
           const rect = titleRef.current.getBoundingClientRect();
-          const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-          if (isVisible) {
-            setForceShow(true);
+          const isNearViewport = rect.top < window.innerHeight + 150; // 画面下150px以内
+          
+          if (isNearViewport) {
+            const timer1 = setTimeout(() => {
+              if (titleRef.current && !inView) {
+                const rect = titleRef.current.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight - 50 && rect.bottom > 50;
+                if (isVisible) {
+                  setForceShow(true);
+                }
+              }
+            }, 1000); // 3秒 → 1秒に短縮
+
+            const timer2 = setTimeout(() => {
+              if (titleRef.current && !inView) {
+                const rect = titleRef.current.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+                if (isVisible) {
+                  setForceShow(true);
+                }
+              }
+            }, 2000); // 5秒 → 2秒に短縮
+
+            return () => {
+              clearTimeout(timer1);
+              clearTimeout(timer2);
+            };
           }
         }
-      }, 1000);
+      };
 
-      // 最終フォールバック：2.5秒後に無条件で表示
-      const timer2 = setTimeout(() => {
-        setForceShow(true);
-      }, 2500);
+      const cleanup = checkProximityAndStartTimer();
+      
+      const handleScroll = () => {
+        if (!inView && !forceShow) {
+          checkProximityAndStartTimer();
+        }
+      };
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
 
       return () => {
-        clearTimeout(timer1);
-        clearTimeout(timer2);
+        window.removeEventListener('scroll', handleScroll);
+        if (cleanup) cleanup();
       };
     }
   }, [inView, forceShow, titleRef]);

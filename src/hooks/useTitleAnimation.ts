@@ -21,7 +21,7 @@ export function useTitleAnimation({
 }: UseTitleAnimationProps) {
   const inView = useInView(titleRef, { 
     once: true, 
-    margin: "0px 0px -50px 0px" // 要素が画面下部50px手前で発火
+    margin: "0px 0px -20px 0px" // 要素が画面下部20px手前で発火（より早く）
   });
   const isInitiallyVisible = useInitialVisibility(titleRef);
   const [titleAnimationComplete, setTitleAnimationComplete] = useState(false);
@@ -29,28 +29,59 @@ export function useTitleAnimation({
 
   const totalTitleDelay = titleText.length * delayPerChar + duration;
 
-  // フォールバック：要素が画面内にあるのにinViewが発火しない場合
+  // フォールバック：要素が画面近くに来た時にタイマー開始
   useEffect(() => {
     if (!inView && !forceInView) {
-      // 1秒後に位置チェック
-      const fallbackTimer1 = setTimeout(() => {
+      const checkProximityAndStartTimer = () => {
         if (titleRef.current) {
           const rect = titleRef.current.getBoundingClientRect();
-          const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-          if (isVisible) {
-            setForceInView(true);
+          const isNearViewport = rect.top < window.innerHeight + 200; // 画面下200px以内
+          
+          if (isNearViewport) {
+            // 要素が画面近くに来たらフォールバックタイマー開始
+            const fallbackTimer1 = setTimeout(() => {
+              if (titleRef.current && !inView) {
+                const rect = titleRef.current.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight - 50 && rect.bottom > 50;
+                if (isVisible) {
+                  setForceInView(true);
+                }
+              }
+            }, 800); // 2秒 → 0.8秒に短縮
+
+            const fallbackTimer2 = setTimeout(() => {
+              if (titleRef.current && !inView) {
+                const rect = titleRef.current.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+                if (isVisible) {
+                  setForceInView(true);
+                }
+              }
+            }, 1500); // 4秒 → 1.5秒に短縮
+
+            return () => {
+              clearTimeout(fallbackTimer1);
+              clearTimeout(fallbackTimer2);
+            };
           }
         }
-      }, 1000);
+      };
 
-      // 最終フォールバック：2秒後に無条件で発火
-      const fallbackTimer2 = setTimeout(() => {
-        setForceInView(true);
-      }, 2000);
+      // 初回チェック
+      const cleanup = checkProximityAndStartTimer();
+      
+      // スクロール時にもチェック
+      const handleScroll = () => {
+        if (!inView && !forceInView) {
+          checkProximityAndStartTimer();
+        }
+      };
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
 
       return () => {
-        clearTimeout(fallbackTimer1);
-        clearTimeout(fallbackTimer2);
+        window.removeEventListener('scroll', handleScroll);
+        if (cleanup) cleanup();
       };
     }
   }, [inView, forceInView, titleRef]);

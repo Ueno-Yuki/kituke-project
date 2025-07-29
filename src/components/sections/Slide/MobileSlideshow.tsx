@@ -36,15 +36,46 @@ export default function MobileSlideshow({
   const titleText = "着物コレクション";
   const [forceShowSlide, setForceShowSlide] = useState(false);
 
-  // スライドショー表示のフォールバック：3秒後に強制表示
+  // スライドショー表示のフォールバック：要素が画面近くに来た時開始
   useEffect(() => {
     if (!titleAnimationComplete) {
-      const timer = setTimeout(() => {
-        setForceShowSlide(true);
-      }, 3000);
-      return () => clearTimeout(timer);
+      const checkProximityAndStartTimer = () => {
+        if (titleRef.current) {
+          const rect = titleRef.current.getBoundingClientRect();
+          const isNearViewport = rect.top < window.innerHeight + 100;
+          
+          if (isNearViewport) {
+            const timer = setTimeout(() => {
+              if (titleRef.current && !titleAnimationComplete) {
+                const rect = titleRef.current.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+                if (isVisible) {
+                  setForceShowSlide(true);
+                }
+              }
+            }, 3000); // 6秒 → 3秒に短縮
+
+            return () => clearTimeout(timer);
+          }
+        }
+      };
+
+      const cleanup = checkProximityAndStartTimer();
+      
+      const handleScroll = () => {
+        if (!titleAnimationComplete) {
+          checkProximityAndStartTimer();
+        }
+      };
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
+
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+        if (cleanup) cleanup();
+      };
     }
-  }, [titleAnimationComplete]);
+  }, [titleAnimationComplete, titleRef]);
 
   const {
     extendedImages,
