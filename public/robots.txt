@@ -1,0 +1,19 @@
+# 着付け師堺 - robots.txt
+# このファイルは検索エンジンにクロール指示を与えます
+
+User-agent: *
+Allow: /
+
+# サイトマップの場所を指定
+Sitemap: https://kituke-sakai.vercel.app/sitemap.xml
+
+# クロール頻度の調整（1日1回程度）
+Crawl-delay: 1
+
+# 特定のファイルタイプを除外
+Disallow: *.json$
+Disallow: *.js$
+Disallow: *.css$
+Disallow: /api/
+Disallow: /_next/
+Disallow: /public/
