@@ -21,6 +21,7 @@ main {
   position: relative;
   z-index: 0; /* 最低z-index */
   min-height: 100vh;
+  overflow-y: hidden;
   /* 画像の品質向上 */
   image-rendering: auto;
 }

@@ -72,7 +72,7 @@ export default function Service() {
   ));
 
   return (
-    <SectionWrapper id="service" style={{ margin: '0', padding: '0', maxWidth: 'none', width: '100vw' }}>
+    <SectionWrapper id="service" style={{ margin: '0', padding: '0', maxWidth: 'none', width: '100vw', height: '100vh' }}>
       <div className={styles.serviceRow}>
         <h2 ref={titleRef} className={`${styles.serviceTitle} sectionTitle`}>
           {textanimate}
