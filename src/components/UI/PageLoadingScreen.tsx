@@ -22,7 +22,7 @@ export default function PageLoadingScreen({ isLoading }: PageLoadingScreenProps)
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.5 }}
             >
-              <h1 className={styles.siteTitle}>着付け師堺</h1>
+              <h1 className={styles.siteTitle}>着付け師境</h1>
             </motion.div> */}
             
             <motion.div

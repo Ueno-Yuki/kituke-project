@@ -1,4 +1,4 @@
-# 着付け師堺 - robots.txt
+# 着付け師境 - robots.txt
 # このファイルは検索エンジンにクロール指示を与えます
 
 User-agent: *
