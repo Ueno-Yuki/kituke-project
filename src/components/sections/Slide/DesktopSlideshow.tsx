@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import styles from "../../../styles/Slide.module.css";
 import { useSlideAnimation } from "./hooks/useSlideAnimation";
@@ -33,6 +34,17 @@ export default function DesktopSlideshow({
   onNext
 }: DesktopSlideshowProps) {
   const titleText = "着物コレクション";
+  const [forceShowSlide, setForceShowSlide] = useState(false);
+
+  // スライドショー表示のフォールバック：3秒後に強制表示
+  useEffect(() => {
+    if (!titleAnimationComplete) {
+      const timer = setTimeout(() => {
+        setForceShowSlide(true);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [titleAnimationComplete]);
 
   const {
     extendedImages,
@@ -47,6 +59,7 @@ export default function DesktopSlideshow({
     height: '100%'
   });
 
+  const shouldShowSlide = titleAnimationComplete || forceShowSlide;
   const extendedImageCount = extendedImages.length;
 
   // 小画像用のスタイル関数（mainImageと同じロジック + オフセット）
@@ -67,7 +80,7 @@ export default function DesktopSlideshow({
       <motion.div 
         className={styles.mainImageSection}
         initial={{ opacity: 0, x: -50 }}
-        animate={titleAnimationComplete ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+        animate={shouldShowSlide ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <div className={styles.mainImage} style={slideContainerStyle}>
@@ -102,7 +115,7 @@ export default function DesktopSlideshow({
         <motion.div 
           className={styles.smallImagesContainer}
           initial={{ opacity: 0, y: 30 }}
-          animate={titleAnimationComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          animate={shouldShowSlide ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
         >
           <div className={styles.smallImage} style={slideContainerStyle}>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Head from "next/head";
+import { motion, AnimatePresence } from "framer-motion";
 import MainVisual from "@/components/sections/MainVisual";
 import Slide from "@/components/sections/Slide";
 import About from "@/components/sections/About";
@@ -7,9 +8,13 @@ import Service from "@/components/sections/Service";
 import HamburgerMenu from "@/components/UI/HamburgerMenu";
 import BackToTop from "@/components/UI/BackToTop";
 import ScrollAnimation from "@/components/UI/ScrollAnimation";
+import PageLoadingScreen from "@/components/UI/PageLoadingScreen";
+import { usePageLoading } from "@/hooks/usePageLoading";
 
 export default function Home() {
   const [ menuOpen, setMenuOpen ] = useState(false);
+  const { isLoading } = usePageLoading();
+  
   return (
     <>
       <Head>
@@ -18,19 +23,34 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ScrollAnimation />
-      <nav role="navigation" aria-label="メインメニュー">
-        <HamburgerMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-      </nav>
-      <main role="main">
-        <MainVisual />
-        <Slide />
-        <About />
-        <Service />
-      </main>
-      <aside role="complementary" aria-label="ページ内ナビゲーション">
-        <BackToTop menuOpen={menuOpen} />
-      </aside>
+      
+      {/* ページローディングスクリーン */}
+      <PageLoadingScreen isLoading={isLoading} />
+      
+      {/* メインコンテンツ - ローディング完了後にフェードイン表示 */}
+      <AnimatePresence>
+        {!isLoading && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.3, ease: "easeOut" }}
+          >
+            <ScrollAnimation />
+            <nav role="navigation" aria-label="メインメニュー">
+              <HamburgerMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+            </nav>
+            <main role="main">
+              <MainVisual />
+              <Slide />
+              <About />
+              <Service />
+            </main>
+            <aside role="complementary" aria-label="ページ内ナビゲーション">
+              <BackToTop menuOpen={menuOpen} />
+            </aside>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

@@ -145,6 +145,7 @@
 @media (max-width: 768px) {
   .slideRow {
     padding: 0;
+    height: 100%;
   }
   .slideSection {
     --bg-image: url('/background/slide-image.jpg');

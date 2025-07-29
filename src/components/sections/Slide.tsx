@@ -11,7 +11,7 @@ export default function Slide() {
   const titleRef = useRef<HTMLDivElement>(null);
   const titleText = "着物コレクション";
   
-  const { currentImages, isMobile, isClient } = useSlideImages();
+  const { currentImages, isMobile } = useSlideImages();
   const { titleAnimationComplete, inView, duration, delayPerChar } = useTitleAnimation({
     titleRef,
     titleText
@@ -63,17 +63,6 @@ export default function Slide() {
       );
     }
   };
-
-  // SSR時は何も表示せず、クライアント側でのみ表示
-  if (!isClient) {
-    return (
-      <SectionWrapper id="slide" className={styles.slideSection}>
-        <div className={styles.slideRow}>
-          {/* SSR時は空の状態 */}
-        </div>
-      </SectionWrapper>
-    );
-  }
 
   return (
     <SectionWrapper id="slide" className={styles.slideSection}>

@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import styles from "../../../styles/Slide.module.css";
 import { useSlideAnimation } from "./hooks/useSlideAnimation";
@@ -33,6 +34,17 @@ export default function MobileSlideshow({
   onNext
 }: MobileSlideshowProps) {
   const titleText = "着物コレクション";
+  const [forceShowSlide, setForceShowSlide] = useState(false);
+
+  // スライドショー表示のフォールバック：3秒後に強制表示
+  useEffect(() => {
+    if (!titleAnimationComplete) {
+      const timer = setTimeout(() => {
+        setForceShowSlide(true);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [titleAnimationComplete]);
 
   const {
     extendedImages,
@@ -44,8 +56,10 @@ export default function MobileSlideshow({
     images,
     actualSlideIndex,
     isTransitioning,
-    height: '300px'
+    height: '30rem'
   });
+
+  const shouldShowSlide = titleAnimationComplete || forceShowSlide;
 
   return (
     <>
@@ -60,11 +74,11 @@ export default function MobileSlideshow({
         style={{ marginBottom: '1rem', textAlign: 'center' }}
       />
       
-      {/* PC版と同様のスライドアニメーション */}
+      {/* スクロール連動スライドアニメーション */}
       <motion.div
         style={slideContainerStyle}
         initial={{ opacity: 0, y: 30 }}
-        animate={titleAnimationComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+        animate={shouldShowSlide ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <SlideContainer 
