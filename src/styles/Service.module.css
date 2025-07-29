@@ -1,6 +1,24 @@
 /* ===============================================
    サービスセクション
    =============================================== */
+.serviceSection {
+  margin: 0;
+  padding: 0;
+  max-width: none;
+  width: 100vw;
+  min-height: 100vh; /* ビューポート高さを最低保証 */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.serviceRow {
+  flex: 1; /* 残りのスペースを埋める */
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0; /* 下部パディング削除 */
+}
+
 .serviceTitle {
   color: var(--primary-brown);
   text-align: center;
@@ -9,6 +27,9 @@
   margin-top: 1.1rem;
   font-size: 1.4rem;
   line-height: 2;
+  flex: 1; /* 残りのスペースを埋める */
+  display: flex;
+  flex-direction: column;
 }
 
 /* ===============================================
@@ -29,8 +50,9 @@
      display: grid;
      grid-template-columns: repeat(4, 1fr);
      grid-template-rows: repeat(2, 1fr);
-     margin-bottom: 2rem;
-     height: 50rem;
+     margin-bottom: 0; /* 下部マージン削除 */
+     flex: 1; /* 残りのスペースを埋める */
+     min-height: 50rem; /* 最低高さを保持 */
     }
     
 /* ===============================================
@@ -154,6 +176,10 @@
    モバイル用CSS
    =============================================== */
 @media (max-width: 768px) {
+  .serviceSection {
+    min-height: 100vh; /* モバイルでも画面高さを保証 */
+  }
+  
   .serviceTitle {
     min-width: 0;
     flex-basis: auto;
@@ -161,8 +187,10 @@
     font-size: 1.3rem;
     line-height: 1.2;
   }
+  
   .serviceGrid {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(4, 1fr);
+    min-height: 60rem; /* モバイルでの最低高さ調整 */
   }
 }

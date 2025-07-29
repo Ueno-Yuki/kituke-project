@@ -39,15 +39,15 @@ export default function Home() {
             <nav role="navigation" aria-label="メインメニュー">
               <HamburgerMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
             </nav>
+            <aside role="complementary" aria-label="ページ内ナビゲーション">
+              <BackToTop menuOpen={menuOpen} />
+            </aside>
             <main role="main">
               <MainVisual />
               <Slide />
               <About />
               <Service />
             </main>
-            <aside role="complementary" aria-label="ページ内ナビゲーション">
-              <BackToTop menuOpen={menuOpen} />
-            </aside>
           </motion.div>
         )}
       </AnimatePresence>

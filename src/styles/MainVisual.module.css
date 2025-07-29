@@ -11,7 +11,7 @@
   overflow-x: hidden;
   margin: 0;
   max-width: none !important;
-  padding: 0 !important;
+  padding: 0;
   box-sizing: border-box;
   background-image: url('/background/mainVisual-image.jpg');
   background-size: cover;
@@ -88,10 +88,6 @@
    モバイル用CSS
    =============================================== */
 @media (max-width: 768px) {
-  .mainVisual {
-    min-height: 100vh;
-    height: 100vh;
-  }
   .scroll {
     bottom: 30%;
   }

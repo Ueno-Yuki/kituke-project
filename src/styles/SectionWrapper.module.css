@@ -1,4 +1,4 @@
-.section {
+.sectionWrapper {
   width: 100%;
   max-width: 1100px;
   margin: 0 auto;
@@ -7,7 +7,7 @@
 } 
 
 @media (max-width: 768px) {
-  .section {
+  .sectionWrapper {
     padding: 80px 20px 40px 20px;
     box-sizing: border-box;
   } 

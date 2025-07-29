@@ -30,7 +30,7 @@ export default function MainVisual() {
   };
 
   return (
-    <SectionWrapper className={styles.mainVisual} style={{ padding: 0 }}>
+    <SectionWrapper className={styles.mainVisual}>
       {renderMainVisual()}
     </SectionWrapper>
   );

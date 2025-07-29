@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import styles from "../../styles/Section.module.css";
+import styles from "../../styles/SectionWrapper.module.css";
 
 interface SectionWrapperProps {
   children: ReactNode;
@@ -15,7 +15,7 @@ interface SectionWrapperProps {
 export default function SectionWrapper({ children, className = "", style, id }: SectionWrapperProps) {
   return (
     <section
-      className={`${styles.section} ${className}`}
+      className={`${styles.sectionWrapper} ${className}`}
       style={style}
       id={id}
     >
