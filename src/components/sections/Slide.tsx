@@ -6,10 +6,11 @@ import { useSlideLogic } from "./Slide/hooks/useSlideLogic";
 import { useTitleAnimation } from "../../hooks/useTitleAnimation";
 import MobileSlideshow from "./Slide/MobileSlideshow";
 import DesktopSlideshow from "./Slide/DesktopSlideshow";
+import { SECTION_TITLES } from "../../constants/content";
 
 export default function Slide() {
   const titleRef = useRef<HTMLDivElement>(null);
-  const titleText = "着物コレクション";
+  const titleText = SECTION_TITLES.MAIN_VISUAL;
   
   const { currentImages, isMobile } = useSlideImages();
   const { titleAnimationComplete, inView, duration, delayPerChar } = useTitleAnimation({

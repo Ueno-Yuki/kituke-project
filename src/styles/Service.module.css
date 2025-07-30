@@ -13,23 +13,13 @@
 }
 
 .serviceRow {
-  flex: 1; /* 残りのスペースを埋める */
   display: flex;
   flex-direction: column;
-  padding-bottom: 0; /* 下部パディング削除 */
 }
 
 .serviceTitle {
   color: var(--primary-brown);
   text-align: center;
-}
-.serviceText {
-  margin-top: 1.1rem;
-  font-size: 1.4rem;
-  line-height: 2;
-  flex: 1; /* 残りのスペースを埋める */
-  display: flex;
-  flex-direction: column;
 }
 
 /* ===============================================

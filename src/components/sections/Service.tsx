@@ -4,24 +4,26 @@ import animationStyles from "../../styles/Animation.module.css";
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
+import { SECTION_TITLES, SERVICES } from "../../constants/content";
+import { MEDIA_QUERIES, UI_ANIMATION, INVIEW_CONFIG, SERVICE_CARDS } from "../../constants/ui";
 
 export default function Service() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const serviceGridRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(titleRef, { once: true });
-  const gridInView = useInView(serviceGridRef, { once: true });
+  const inView = useInView(titleRef, INVIEW_CONFIG.DEFAULT);
+  const gridInView = useInView(serviceGridRef, INVIEW_CONFIG.DEFAULT);
   const [showText, setShowText] = useState(false);
   const [isInitiallyVisible, setIsInitiallyVisible] = useState(false);
-  const [showCards, setShowCards] = useState<boolean[]>(new Array(8).fill(false));
+  const [showCards, setShowCards] = useState<boolean[]>(new Array(SERVICE_CARDS.TOTAL_COUNT).fill(false));
 
   // 追加: 768px以下かどうか
-  const isMobile = useMediaQuery("(max-width: 768px)");
+  const isMobile = useMediaQuery(MEDIA_QUERIES.MOBILE);
 
-  const titles = "サービス内容";
+  const titles = SECTION_TITLES.SERVICE;
   const title = titles.split("");
-  const duration = 1.0;
-  const delayPerChar = 0.10;
-  const extraDelay = 0.2; // タイトルが全て表示されてから内容が出るまでの待ち時間（秒）
+  const duration = UI_ANIMATION.TITLE.DURATION;
+  const delayPerChar = UI_ANIMATION.TITLE.DELAY_PER_CHAR;
+  const extraDelay = UI_ANIMATION.TITLE.EXTRA_DELAY; // タイトルが全て表示されてから内容が出るまでの待ち時間（秒）
   const totalDelay = (title.length - 1) * delayPerChar + duration + extraDelay;
 
   // 初期表示時の可視性をチェック
@@ -54,8 +56,8 @@ export default function Service() {
   useEffect(() => {
     if (gridInView && showText) {
       const timer = setTimeout(() => {
-        setShowCards(new Array(8).fill(true)); // 全てのカードを同時にtrue
-      }, 100); // グリッドが見えてから100ms後にアニメーション開始
+        setShowCards(new Array(SERVICE_CARDS.TOTAL_COUNT).fill(true)); // 全てのカードを同時にtrue
+      }, SERVICE_CARDS.ANIMATION_DELAY); // グリッドが見えてから指定時間後にアニメーション開始
       return () => clearTimeout(timer);
     }
   }, [gridInView, showText]);
@@ -77,16 +79,13 @@ export default function Service() {
         <h2 ref={titleRef} className={`${styles.serviceTitle} sectionTitle`}>
           {textanimate}
         </h2>
-        <div
-          className={styles.serviceText}
+        <div 
+          ref={serviceGridRef}
+          className={styles.serviceGrid}
+          style={{ 
+            visibility: showText ? 'visible' : 'hidden'
+          }}
         >
-          <div 
-            ref={serviceGridRef}
-            className={styles.serviceGrid}
-            style={{ 
-              visibility: showText ? 'visible' : 'hidden'
-            }}
-          >
             <div className={`${styles.serviceCard} ${styles.seijinshiki} ${showCards[0] ? styles.animating : ''}`}>
               <div className={`${animationStyles.slideReveal} ${showCards[0] ? animationStyles.animate : ''}`}>
                 <div className={styles.cardOverlay}>
@@ -143,7 +142,6 @@ export default function Service() {
                 </div>
               </div>
             </div>
-          </div>
         </div>
       </div>
     </SectionWrapper>

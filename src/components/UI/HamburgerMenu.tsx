@@ -10,6 +10,7 @@ const sections = [
   { id: "slide", label: "着物コレクション" },
   { id: "about", label: "私について" },
   { id: "service", label: "サービス内容" },
+  { id: "contact", label: "お問い合わせ" },
   // 必要に応じて追加
 ];
 

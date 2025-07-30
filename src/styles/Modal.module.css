@@ -1,0 +1,265 @@
+/* ===============================================
+   モーダルコンポーネント
+   =============================================== */
+
+/* オーバーレイ */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+/* モーダルコンテナ */
+.modalContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+  padding: 1rem;
+}
+
+/* モーダル本体 */
+.modal {
+  background: var(--background-white);
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 90vw;
+  max-height: 90vh;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ヘッダー */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid rgba(122, 92, 62, 0.1);
+  background: linear-gradient(135deg, #f8f6f3 0%, #f0ebe4 100%);
+  border-radius: 12px 12px 0 0;
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary-brown);
+  margin: 0;
+  letter-spacing: 0.05em;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--primary-brown);
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: var(--transition-smooth);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+}
+
+.closeButton:hover {
+  background: rgba(122, 92, 62, 0.1);
+  color: var(--hover-brown);
+  transform: scale(1.1);
+}
+
+/* コンテンツ */
+.content {
+  padding: 2rem;
+  overflow-y: auto;
+  flex: 1;
+  line-height: 1.7;
+  color: var(--text-dark);
+  font-family: 'Noto Sans JP', sans-serif;
+  min-height: 0;
+}
+
+/* コンテンツ内のスタイル */
+.content h3 {
+  color: var(--primary-brown);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 1.5rem 0 0.75rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--secondary-brown);
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.content h3:first-child {
+  margin-top: 0;
+}
+
+.content p {
+  margin: 0.75rem 0;
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+.content ul {
+  margin: 0.75rem 0;
+  padding-left: 1.5rem;
+}
+
+.content li {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* フッター（下部固定エリア） */
+.footer {
+  padding: 1rem 0.5rem;
+  border-top: 1px solid rgba(122, 92, 62, 0.1);
+  background: linear-gradient(135deg, #f8f6f3 0%, #f0ebe4 100%);
+  border-radius: 0 0 12px 12px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.closeButtonBottom {
+  background: var(--primary-brown);
+  color: var(--background-white);
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  font-family: 'Noto Sans JP', sans-serif;
+  min-width: 95%;
+  box-shadow: 0 2px 8px rgba(122, 92, 62, 0.2);
+}
+
+.closeButtonBottom:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(122, 92, 62, 0.3);
+  filter: brightness(0.8);
+}
+
+/* スクロールバーのスタイル */
+.content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.content::-webkit-scrollbar-track {
+  background: #f8f6f3;
+  border-radius: 4px;
+}
+
+.content::-webkit-scrollbar-thumb {
+  background: var(--secondary-brown);
+  border-radius: 4px;
+  opacity: 0.8;
+}
+
+.content::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-brown);
+  opacity: 1;
+}
+
+/* ===============================================
+   モバイル対応
+   =============================================== */
+@media (max-width: 768px) {
+  .modalContainer {
+    padding: 0.5rem;
+  }
+
+  .modal {
+    width: 95vw;
+    max-height: 85vh;
+    overflow: hidden;
+  }
+
+  .header {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .title {
+    font-size: 1.2rem;
+  }
+
+  .closeButton {
+    font-size: 1.3rem;
+    width: 28px;
+    height: 28px;
+  }
+
+  .content {
+    padding: 1.5rem;
+  }
+
+  .content h3 {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .footer {
+    padding: 1rem 1.5rem;
+  }
+
+  .closeButtonBottom {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modalContainer {
+    padding: 0;
+  }
+
+  .modal {
+    width: 100vw;
+    height: 100vh;
+    max-width: none;
+    max-height: none;
+    border-radius: 0;
+    overflow: hidden;
+  }
+
+  .header {
+    border-radius: 0;
+    padding: 1rem 1.25rem;
+  }
+
+  .content {
+    padding: 1.25rem;
+  }
+
+  .footer {
+    padding: 1rem 1.25rem;
+    border-radius: 0;
+  }
+
+  .closeButtonBottom {
+    padding: 0.65rem 1.25rem;
+    font-size: 0.8rem;
+    width: 100%;
+    max-width: 200px;
+  }
+}
