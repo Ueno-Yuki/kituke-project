@@ -35,8 +35,8 @@ export default function Footer() {
     <motion.footer
       ref={footerRef}
       className={styles.footer}
-      initial={{ opacity: 0, y: UI_ANIMATION.FOOTER.INITIAL_Y }}
-      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: UI_ANIMATION.FOOTER.INITIAL_Y }}
+      initial={{ opacity: 1, y: 0 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
       transition={{ duration: UI_ANIMATION.FOOTER.DURATION, ease: UI_ANIMATION.FOOTER.EASING }}
     >
       <div className={styles.footerContainer}>

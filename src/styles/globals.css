@@ -21,6 +21,8 @@ main {
   min-height: 100vh;
   /* 画像の品質向上 */
   image-rendering: auto;
+  /* スクロールバー統一管理 - ブラウザネイティブのみ使用 */
+  overflow-y: hidden;
 }
 
 /* モバイル端末での最適化 */
@@ -66,6 +68,50 @@ a {
   text-decoration: none;
 }
 
+
+/* ===============================================
+   モーダル関連スタイル - グローバル初期化
+   =============================================== */
+
+/* モーダル表示時のページスクロール制御 */
+body.modal-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  /* モーダル内スクロール許可のカスタムプロパティ */
+  --modal-content-overflow: auto;
+  --modal-scrollbar-width: 8px;
+  --modal-scrollbar-track: #f8f6f3;
+  --modal-scrollbar-thumb: var(--secondary-brown);
+  --modal-scrollbar-thumb-hover: var(--primary-brown);
+}
+
+/* モーダル用スクロールバー統一設定 */
+.modal-content-scrollable {
+  overflow-y: var(--modal-content-overflow, hidden);
+  scrollbar-width: thin;
+  scrollbar-color: var(--modal-scrollbar-thumb) var(--modal-scrollbar-track);
+}
+
+.modal-content-scrollable::-webkit-scrollbar {
+  width: var(--modal-scrollbar-width);
+}
+
+.modal-content-scrollable::-webkit-scrollbar-track {
+  background: var(--modal-scrollbar-track);
+  border-radius: 4px;
+}
+
+.modal-content-scrollable::-webkit-scrollbar-thumb {
+  background: var(--modal-scrollbar-thumb);
+  border-radius: 4px;
+  opacity: 0.8;
+}
+
+.modal-content-scrollable::-webkit-scrollbar-thumb:hover {
+  background: var(--modal-scrollbar-thumb-hover);
+  opacity: 1;
+}
 
 .sectionTitle {
   font-size: 2.2rem;

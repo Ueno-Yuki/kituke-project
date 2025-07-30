@@ -1,5 +1,5 @@
-import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useModal } from "../../hooks/useModal";
 import styles from "../../styles/Modal.module.css";
 
 interface ModalProps {
@@ -10,25 +10,8 @@ interface ModalProps {
 }
 
 export default function Modal({ isOpen, onClose, title, children }: ModalProps) {
-  // ESCキーでモーダルを閉じる
-  useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        onClose();
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener("keydown", handleEsc);
-      // スクロールを無効化
-      document.body.style.overflow = "hidden";
-    }
-
-    return () => {
-      document.removeEventListener("keydown", handleEsc);
-      document.body.style.overflow = "unset";
-    };
-  }, [isOpen, onClose]);
+  // カスタムフックでスクロール制御とキーボードイベントを管理
+  useModal(isOpen, onClose);
 
   return (
     <AnimatePresence>
@@ -67,7 +50,7 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
             </div>
 
               {/* コンテンツ */}
-              <div className={styles.content}>
+              <div className={`${styles.content} modal-content-scrollable`}>
                 {children}
               </div>
               

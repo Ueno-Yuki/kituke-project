@@ -3,10 +3,9 @@
    =============================================== */
 .serviceSection {
   margin: 0;
-  padding: 0;
+  padding: 4rem 0;
   max-width: none;
   width: 100vw;
-  min-height: 100vh; /* ビューポート高さを最低保証 */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -167,7 +166,7 @@
    =============================================== */
 @media (max-width: 768px) {
   .serviceSection {
-    min-height: 100vh; /* モバイルでも画面高さを保証 */
+    padding: 3rem 0; /* モバイルでは適切な余白を設定 */
   }
   
   .serviceTitle {
