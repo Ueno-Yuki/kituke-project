@@ -6,66 +6,224 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 2rem;
+  padding: 2rem;
 }
 
-.spinner {
-  border-radius: 50%;
+/* メインローディングアニメーション */
+.loadingAnimation {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.spinnerInner {
+/* 外側のリング */
+.outerRing {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+}
+
+.ringElement {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  border: 3px solid transparent;
-  border-top: 3px solid var(--primary-brown, #8B4513);
-  border-right: 3px solid var(--primary-brown, #8B4513);
+  border: 4px solid transparent;
+  border-top: 4px solid #7a5c3e;
+  border-right: 4px solid #7a5c3e;
+  opacity: 0.8;
 }
 
+/* 内側のパルス */
+.innerPulse {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+}
+
+.pulseElement {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(122, 92, 62, 0.3), rgba(122, 92, 62, 0.1));
+  border: 2px solid rgba(122, 92, 62, 0.4);
+}
+
+/* 中央のアイコン */
+.centerIcon {
+  position: relative;
+  z-index: 2;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconElement {
+  font-size: 28px;
+  font-weight: bold;
+  color: #7a5c3e;
+  font-family: 'Noto Sans JP', sans-serif;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ローディングドット */
+.loadingDots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7a5c3e, #a0804a);
+  box-shadow: 0 2px 4px rgba(122, 92, 62, 0.3);
+}
+
+/* ローディングテキスト */
 .loadingText {
-  color: var(--text-dark, #666);
-  font-size: 1rem;
+  color: #555;
+  font-size: 1.1rem;
   font-weight: 500;
   margin: 0;
   text-align: center;
+  font-family: 'Noto Sans JP', sans-serif;
+  letter-spacing: 0.5px;
 }
 
 /* サイズバリエーション */
-.small .spinner {
-  width: 20px;
-  height: 20px;
+.small .outerRing {
+  width: 80px;
+  height: 80px;
+}
+
+.small .innerPulse {
+  width: 50px;
+  height: 50px;
+}
+
+.small .centerIcon {
+  width: 30px;
+  height: 30px;
+}
+
+.small .iconElement {
+  font-size: 16px;
+}
+
+.small .dot {
+  width: 6px;
+  height: 6px;
 }
 
 .small .loadingText {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 }
 
-.medium .spinner {
-  width: 40px;
-  height: 40px;
+.medium .outerRing {
+  width: 140px;
+  height: 140px;
+}
+
+.medium .innerPulse {
+  width: 90px;
+  height: 90px;
+}
+
+.medium .centerIcon {
+  width: 50px;
+  height: 50px;
+}
+
+.medium .iconElement {
+  font-size: 28px;
+}
+
+.medium .dot {
+  width: 8px;
+  height: 8px;
 }
 
 .medium .loadingText {
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
 
-.large .spinner {
-  width: 60px;
-  height: 60px;
+.large .outerRing {
+  width: 180px;
+  height: 180px;
+}
+
+.large .innerPulse {
+  width: 120px;
+  height: 120px;
+}
+
+.large .centerIcon {
+  width: 70px;
+  height: 70px;
+}
+
+.large .iconElement {
+  font-size: 36px;
+}
+
+.large .dot {
+  width: 10px;
+  height: 10px;
 }
 
 .large .loadingText {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
 }
 
 /* モバイル対応 */
 @media (max-width: 768px) {
   .loadingContainer {
-    gap: 0.8rem;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+  
+  .outerRing {
+    width: 120px !important;
+    height: 120px !important;
+  }
+  
+  .innerPulse {
+    width: 75px !important;
+    height: 75px !important;
+  }
+  
+  .centerIcon {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  
+  .iconElement {
+    font-size: 24px !important;
   }
   
   .loadingText {
-    font-size: 0.9rem;
+    font-size: 1rem !important;
+  }
+  
+  .dot {
+    width: 7px !important;
+    height: 7px !important;
+  }
+}
+
+/* アクセシビリティ対応 */
+@media (prefers-reduced-motion: reduce) {
+  .outerRing,
+  .innerPulse,
+  .dot {
+    animation: none;
   }
 }

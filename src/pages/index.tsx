@@ -17,7 +17,7 @@ import { usePageLoading } from "@/hooks/usePageLoading";
 
 export default function Home() {
   const [ menuOpen, setMenuOpen ] = useState(false);
-  const { isLoading } = usePageLoading();
+  const { isLoading, resourcesLoaded } = usePageLoading();
   
   return (
     <>
@@ -59,7 +59,7 @@ export default function Home() {
       </Head>
       
       {/* ページローディングスクリーン */}
-      <PageLoadingScreen isLoading={isLoading} />
+      <PageLoadingScreen isLoading={isLoading} resourcesLoaded={resourcesLoaded} />
       
       {/* メインコンテンツ - ローディング完了後にフェードイン表示 */}
       <AnimatePresence>
