@@ -1,0 +1,223 @@
+/* ===============================================
+   トースト通知コンテナ
+   =============================================== */
+.toastContainer {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 12px;
+  max-width: 400px;
+  width: 100%;
+  pointer-events: none;
+}
+
+/* ===============================================
+   トースト本体
+   =============================================== */
+.toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  background: white;
+  border-radius: 12px;
+  border-left: 4px solid;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  pointer-events: auto;
+  backdrop-filter: blur(10px);
+}
+
+.toast:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* ===============================================
+   トーストタイプ別スタイル
+   =============================================== */
+.toast.success {
+  border-left-color: #10b981;
+  background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+}
+
+.toast.error {
+  border-left-color: #ef4444;
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+}
+
+.toast.warning {
+  border-left-color: #f59e0b;
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+}
+
+.toast.info {
+  border-left-color: #3b82f6;
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+}
+
+/* ===============================================
+   アイコンエリア
+   =============================================== */
+.toastIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: bold;
+  flex-shrink: 0;
+  color: white;
+  margin-top: 2px;
+}
+
+.success .toastIcon {
+  background: #10b981;
+}
+
+.error .toastIcon {
+  background: #ef4444;
+}
+
+.warning .toastIcon {
+  background: #f59e0b;
+}
+
+.info .toastIcon {
+  background: #3b82f6;
+}
+
+/* ===============================================
+   コンテンツエリア
+   =============================================== */
+.toastContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.toastTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.4;
+  margin-bottom: 2px;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.toastMessage {
+  font-size: 13px;
+  color: #374151;
+  line-height: 1.5;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+/* ===============================================
+   閉じるボタン
+   =============================================== */
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 12px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.closeButton:hover {
+  background: rgba(107, 114, 128, 0.1);
+  color: #6b7280;
+}
+
+/* ===============================================
+   プログレスバー
+   =============================================== */
+.progressBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.6));
+  border-radius: 0 0 8px 8px;
+}
+
+.success .progressBar {
+  background: linear-gradient(90deg, #10b981, #059669);
+}
+
+.error .progressBar {
+  background: linear-gradient(90deg, #ef4444, #dc2626);
+}
+
+.warning .progressBar {
+  background: linear-gradient(90deg, #f59e0b, #d97706);
+}
+
+.info .progressBar {
+  background: linear-gradient(90deg, #3b82f6, #2563eb);
+}
+
+/* ===============================================
+   モバイル対応
+   =============================================== */
+@media (max-width: 640px) {
+  .toastContainer {
+    bottom: 10px;
+    right: 10px;
+    left: 10px;
+    max-width: none;
+  }
+
+  .toast {
+    padding: 14px;
+    gap: 10px;
+  }
+
+  .toastIcon {
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+  }
+
+  .toastTitle {
+    font-size: 13px;
+  }
+
+  .toastMessage {
+    font-size: 12px;
+  }
+
+  .closeButton {
+    width: 18px;
+    height: 18px;
+    font-size: 11px;
+  }
+}
+
+/* ===============================================
+   アクセシビリティ対応
+   =============================================== */
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    transition: none;
+  }
+  
+  .toast:hover {
+    transform: none;
+  }
+}

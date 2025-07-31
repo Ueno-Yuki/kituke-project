@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import styles from "../../../styles/Slide.module.css";
+import styles from "../../../styles/Slide/Slide.module.css";
 import { useSlideAnimation } from "./hooks/useSlideAnimation";
 import AnimatedTitle from "./AnimatedTitle";
 import SlideContainer from "./SlideContainer";

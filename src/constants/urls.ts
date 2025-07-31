@@ -3,9 +3,9 @@
 /** 基本URL */
 export const URLS = {
   /** サイトのベースURL */
-  CANONICAL: "https://kituke-sakai.vercel.app/",
+  CANONICAL: process.env.NEXT_PUBLIC_SITE_URL || "https://localhost:3000",
   /** Instagram プロフィール */
-  INSTAGRAM: "https://www.instagram.com/sakaiyukie1102",
+  INSTAGRAM: process.env.NEXT_PUBLIC_INSTAGRAM_URL || "https://www.instagram.com/",
   /** サイトマップ */
   SITEMAP: "/sitemap.xml",
   /** ファビコン */

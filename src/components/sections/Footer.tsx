@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import styles from "../../styles/Footer.module.css";
+import styles from "../../styles/Footer/Footer.module.css";
 import Modal from "../UI/Modal";
 import { POLICIES } from "../../constants/content";
 import { UI_ANIMATION, INVIEW_CONFIG } from "../../constants/ui";

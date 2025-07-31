@@ -1,6 +1,6 @@
 import SectionWrapper from "../Layout/SectionWrapper";
-import styles from "../../styles/About.module.css";
-import animationStyles from "../../styles/Animation.module.css";
+import styles from "../../styles/About/About.module.css";
+import animationStyles from "../../styles/Common/Animation.module.css";
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -110,7 +110,7 @@ export default function About() {
           <p>{ABOUT_TEXT.experience_5}</p>
           <div className={styles.aboutSNS}>
             <a
-              href="https://www.instagram.com/sakaiyukie1102?igsh=MXJic2JzMTY3bnU2&utm_source=qr"
+              href={URLS.INSTAGRAM}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"

@@ -1,4 +1,4 @@
-import styles from "../../../styles/Slide.module.css";
+import styles from "../../../styles/Slide/Slide.module.css";
 
 interface SlideControlsProps {
   currentSlideIndex: number;

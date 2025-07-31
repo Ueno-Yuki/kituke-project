@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import SectionWrapper from "../Layout/SectionWrapper";
-import styles from "../../styles/Slide.module.css";
+import styles from "../../styles/Slide/Slide.module.css";
 import { useSlideImages } from "./Slide/hooks/useSlideImages";
 import { useSlideLogic } from "./Slide/hooks/useSlideLogic";
 import { useTitleAnimation } from "../../hooks/useTitleAnimation";

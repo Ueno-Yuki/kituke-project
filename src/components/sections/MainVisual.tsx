@@ -1,5 +1,5 @@
 import SectionWrapper from "../Layout/SectionWrapper";
-import styles from "../../styles/MainVisual.module.css";
+import styles from "../../styles/MainVisual/MainVisual.module.css";
 import { useMainVisualAnimation } from "./MainVisual/hooks/useMainVisualAnimation";
 import DesktopMainVisual from "./MainVisual/DesktopMainVisual";
 import MobileMainVisual from "./MainVisual/MobileMainVisual";

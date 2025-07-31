@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import styles from "../../styles/LoadingSpinner.module.css";
+import styles from "../../styles/UI/LoadingSpinner.module.css";
 
 interface LoadingSpinnerProps {
   message?: string;

@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import LoadingSpinner from "./LoadingSpinner";
-import styles from "../../styles/PageLoadingScreen.module.css";
+import styles from "../../styles/UI/PageLoadingScreen.module.css";
 
 interface PageLoadingScreenProps {
   isLoading: boolean;

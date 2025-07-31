@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import styles from "../../styles/SectionWrapper.module.css";
+import styles from "../../styles/SectionWrappper/SectionWrapper.module.css";
 
 interface SectionWrapperProps {
   children: ReactNode;

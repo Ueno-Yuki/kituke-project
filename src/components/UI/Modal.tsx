@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useModal } from "../../hooks/useModal";
-import styles from "../../styles/Modal.module.css";
+import styles from "../../styles/UI/Modal.module.css";
 
 interface ModalProps {
   isOpen: boolean;

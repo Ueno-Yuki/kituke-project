@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import styles from "../../styles/HamburgerMenu.module.css";
+import styles from "../../styles/UI/HamburgerMenu.module.css";
 
 interface HamburgerMenuProps {
   menuOpen: boolean;

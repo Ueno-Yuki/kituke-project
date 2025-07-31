@@ -1,6 +1,6 @@
 import SectionWrapper from "../Layout/SectionWrapper";
-import styles from "../../styles/Service.module.css";
-import animationStyles from "../../styles/Animation.module.css";
+import styles from "../../styles/Service/Service.module.css";
+import animationStyles from "../../styles/Common/Animation.module.css";
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
