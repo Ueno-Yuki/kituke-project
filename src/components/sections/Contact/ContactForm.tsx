@@ -2,20 +2,7 @@ import { useState } from "react";
 import styles from "../../../styles/Contact/Contact.module.css";
 import ToastContainer from "../../UI/Toast";
 import { useToast } from "../../../hooks/useToast";
-
-interface FormData {
-  name: string;
-  email: string;
-  phone: string;
-  content: string;
-}
-
-interface FormErrors {
-  name?: string;
-  email?: string;
-  phone?: string;
-  content?: string;
-}
+import { FormData, FormErrors } from "@/types";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState<FormData>({

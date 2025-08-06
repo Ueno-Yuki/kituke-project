@@ -1,13 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useModal } from "../../hooks/useModal";
-import styles from "../../styles/UI/Modal.module.css";
-
-interface ModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  title: string;
-  children: React.ReactNode;
-}
+import styles from "@/styles/UI/Modal.module.css";
+import { ModalProps } from "@/types";
 
 export default function Modal({ isOpen, onClose, title, children }: ModalProps) {
   // カスタムフックでスクロール制御とキーボードイベントを管理

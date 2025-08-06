@@ -1,10 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import { TIMEOUTS } from '../../../../constants/animation';
-
-interface UseSlideLogicProps {
-  images: string[];
-  titleAnimationComplete: boolean;
-}
+import { TIMEOUTS } from '@/constants/animation';
+import { UseSlideLogicProps } from '@/types';
 
 /**
  * スライドショーのロジックを管理するカスタムフック

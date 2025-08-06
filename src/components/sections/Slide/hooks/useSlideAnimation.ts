@@ -1,11 +1,5 @@
 import { useMemo } from 'react';
-
-interface UseSlideAnimationProps {
-  images: string[];
-  actualSlideIndex: number;
-  isTransitioning: boolean;
-  height?: string;
-}
+import { UseSlideAnimationProps } from '@/types';
 
 /**
  * スライドアニメーションに必要な共通ロジックと値を提供するフック

@@ -1,10 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
-import styles from "../../styles/UI/HamburgerMenu.module.css";
-
-interface HamburgerMenuProps {
-  menuOpen: boolean;
-  setMenuOpen: (open: boolean) => void;
-}
+import styles from "@/styles/UI/HamburgerMenu.module.css";
+import { HamburgerMenuProps } from "@/types";
 
 const sections = [
   { id: "slide", label: "着物コレクション" },

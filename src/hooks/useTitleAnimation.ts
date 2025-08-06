@@ -1,14 +1,8 @@
-import { useState, useEffect, RefObject } from 'react';
+import { useState, useEffect } from 'react';
 import { useInView } from 'framer-motion';
 import { useInitialVisibility } from './useInitialVisibility';
 import { ANIMATION_DELAYS, ANIMATION_DURATIONS } from '../constants/animation';
-
-interface UseTitleAnimationProps {
-  titleRef: RefObject<HTMLElement | null>;
-  titleText: string;
-  duration?: number;
-  delayPerChar?: number;
-}
+import { UseTitleAnimationProps } from '@/types';
 
 /**
  * タイトルアニメーションの管理を行うカスタムフック

@@ -5,20 +5,7 @@ import { useSlideAnimation } from "./hooks/useSlideAnimation";
 import AnimatedTitle from "./AnimatedTitle";
 import SlideContainer from "./SlideContainer";
 import SlideControls from "./SlideControls";
-
-interface MobileSlideshowProps {
-  images: string[];
-  currentSlideIndex: number;
-  actualSlideIndex: number;
-  isTransitioning: boolean;
-  titleAnimationComplete: boolean;
-  inView: boolean;
-  duration: number;
-  delayPerChar: number;
-  titleRef: React.RefObject<HTMLDivElement | null>;
-  onPrevious: () => void;
-  onNext: () => void;
-}
+import { MobileSlideshowProps } from "@/types";
 
 export default function MobileSlideshow({
   images,

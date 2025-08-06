@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import type { Toast, ToastType } from '../components/UI/Toast';
+import type { Toast, ToastType } from '@/types';
 
 // ユニークIDを生成する関数
 const generateId = (): string => {

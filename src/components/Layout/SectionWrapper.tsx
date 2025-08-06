@@ -1,12 +1,5 @@
-import { ReactNode } from "react";
 import styles from "../../styles/SectionWrappper/SectionWrapper.module.css";
-
-interface SectionWrapperProps {
-  children: ReactNode;
-  className?: string;
-  style?: React.CSSProperties;
-  id?: string;
-}
+import { SectionWrapperProps } from "@/types";
 
 /**
  * ページセクションのラッパーコンポーネント

@@ -1,15 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-
-interface AnimatedTitleProps {
-  titleRef: React.RefObject<HTMLDivElement | null>;
-  titleText: string;
-  inView: boolean;
-  duration: number;
-  delayPerChar: number;
-  className?: string;
-  style?: React.CSSProperties;
-}
+import { AnimatedTitleProps } from "@/types";
 
 /**
  * アニメーション付きタイトルコンポーネント

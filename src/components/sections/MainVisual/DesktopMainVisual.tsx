@@ -1,11 +1,7 @@
 import { motion } from "framer-motion";
 import styles from "../../../styles/MainVisual/MainVisual.module.css";
 import animationStyles from "../../../styles/Common/Animation.module.css";
-
-interface DesktopMainVisualProps {
-  titleText: string;
-  titleAnimationComplete: boolean;
-}
+import { DesktopMainVisualProps } from "@/types";
 
 /**
  * デスクトップ版MainVisual - 一行表示

@@ -1,9 +1,5 @@
 import { useState, useEffect } from 'react';
-
-interface SlideImages {
-  desktop: string[];
-  mobile: string[];
-}
+import { SlideImages } from '@/types';
 
 const defaultImages: SlideImages = {
   desktop: ['/pc/hero01.jpg'],

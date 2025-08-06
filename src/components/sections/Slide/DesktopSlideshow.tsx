@@ -5,20 +5,7 @@ import { useSlideAnimation } from "./hooks/useSlideAnimation";
 import AnimatedTitle from "./AnimatedTitle";
 import SlideContainer from "./SlideContainer";
 import SlideControls from "./SlideControls";
-
-interface DesktopSlideshowProps {
-  images: string[];
-  currentSlideIndex: number;
-  actualSlideIndex: number;
-  isTransitioning: boolean;
-  titleAnimationComplete: boolean;
-  inView: boolean;
-  duration: number;
-  delayPerChar: number;
-  titleRef: React.RefObject<HTMLDivElement | null>;
-  onPrevious: () => void;
-  onNext: () => void;
-}
+import { DesktopSlideshowProps } from "@/types";
 
 export default function DesktopSlideshow({
   images,

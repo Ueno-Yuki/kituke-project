@@ -1,17 +1,13 @@
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import styles from "../../styles/UI/LoadingSpinner.module.css";
-
-interface LoadingSpinnerProps {
-  message?: string;
-  size?: 'small' | 'medium' | 'large';
-}
+import { LoadingSpinnerProps } from "@/types";
 
 export default function LoadingSpinner({ 
   message = "Now Loading...", 
   size = 'medium' 
 }: LoadingSpinnerProps) {
   // ドットアニメーション用のバリアント
-  const dotVariants = {
+  const dotVariants: Variants = {
     initial: { y: 0, opacity: 0.7 },
     animate: { 
       y: [-8, 0, -8], 
@@ -25,7 +21,7 @@ export default function LoadingSpinner({
   };
 
   // リングアニメーション用のバリアント
-  const ringVariants = {
+  const ringVariants: Variants = {
     animate: {
       rotate: 360,
       transition: {
@@ -37,7 +33,7 @@ export default function LoadingSpinner({
   };
 
   // パルスアニメーション用のバリアント
-  const pulseVariants = {
+  const pulseVariants: Variants = {
     animate: {
       scale: [1, 1.1, 1],
       opacity: [0.8, 1, 0.8],

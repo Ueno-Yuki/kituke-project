@@ -1,21 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { Resend } from 'resend';
+import { ContactFormData, ApiResponse } from '@/types';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-
-interface ContactFormData {
-  name: string;
-  email: string;
-  phone: string;
-  content: string;
-}
-
-interface ApiResponse {
-  success?: boolean;
-  error?: string;
-  details?: any;
-  data?: any;
-}
 
 export default async function handler(
   req: NextApiRequest,

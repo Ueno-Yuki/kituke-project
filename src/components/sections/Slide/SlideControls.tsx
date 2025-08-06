@@ -1,12 +1,5 @@
-import styles from "../../../styles/Slide/Slide.module.css";
-
-interface SlideControlsProps {
-  currentSlideIndex: number;
-  imageCount: number;
-  onPrevious: () => void;
-  onNext: () => void;
-  className?: string;
-}
+import styles from "@/styles/Slide/Slide.module.css";
+import { SlideControlsProps } from "@/types";
 
 /**
  * スライドコントロール（ボタン・カウンター）コンポーネント

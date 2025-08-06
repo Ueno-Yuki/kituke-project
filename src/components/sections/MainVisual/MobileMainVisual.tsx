@@ -1,11 +1,7 @@
 import { motion } from "framer-motion";
 import styles from "../../../styles/MainVisual/MainVisual.module.css";
 import animationStyles from "../../../styles/Common/Animation.module.css";
-
-interface MobileMainVisualProps {
-  titleText: string;
-  titleAnimationComplete: boolean;
-}
+import { MobileMainVisualProps } from "@/types";
 
 /**
  * モバイル版MainVisual - 縦書き・改行表示

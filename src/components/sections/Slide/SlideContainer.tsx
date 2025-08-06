@@ -1,8 +1,4 @@
-interface SlideContainerProps {
-  extendedImages: string[];
-  slideWrapperStyle: React.CSSProperties;
-  slideItemStyle: React.CSSProperties;
-}
+import { SlideContainerProps } from "@/types";
 
 /**
  * スライド画像コンテナコンポーネント
