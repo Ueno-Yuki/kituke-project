@@ -1,15 +1,10 @@
-// src/components/sections/Service.tsx
-import { useRef, useState, useEffect } from "react";
-import { motion, useInView, AnimatePresence, Variants } from "framer-motion";
-import SectionWrapper from "@/components//Layout/SectionWrapper";
-import styles from "@/styles/Service/Service.module.css";
-import animationStyles from "@/styles/Common/Animation.module.css";
-import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { SERVICES, SECTION_TITLES, SERVICE_DETAILS } from "@/constants/content";
-import { MEDIA_QUERIES, UI_ANIMATION, INVIEW_CONFIG, DOM_TIMEOUTS } from "@/constants/ui";
-import { ServiceCardProps } from "@/types";
+import { useState } from 'react';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
+import styles from '@/styles/Service/Service.module.css';
+import animationStyles from '@/styles/Common/Animation.module.css';
+import { ServiceCardProps, ServiceDetail } from '@/types';
 
-function ServiceCard({ service, isAnimating, className = '' }: ServiceCardProps) {
+export default function ServiceCard({ service, isAnimating, className = '' }: ServiceCardProps) {
   const [showDetails, setShowDetails] = useState(false);
 
   const handleCardClick = () => {
@@ -19,7 +14,7 @@ function ServiceCard({ service, isAnimating, className = '' }: ServiceCardProps)
   };
 
   // カード表示用のバリアント
-  const cardVariants: Variants = {
+  const cardVariants = {
     default: {
       scale: 1,
       transition: { duration: 0.3 }
@@ -160,85 +155,5 @@ function ServiceCard({ service, isAnimating, className = '' }: ServiceCardProps)
         </AnimatePresence>
       </div>
     </motion.div>
-  );
-}
-
-// メインのServiceコンポーネント
-export default function Service() {
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(titleRef, INVIEW_CONFIG.DEFAULT);
-  const gridInView = useInView(gridRef, INVIEW_CONFIG.CONTENT);
-  
-  const [showCards, setShowCards] = useState<boolean[]>(new Array(SERVICES.length).fill(false));
-  const [isInitiallyVisible, setIsInitiallyVisible] = useState(false);
-
-  const isMobile = useMediaQuery(MEDIA_QUERIES.MOBILE || "(max-width: 768px)");
-
-  const titles = SECTION_TITLES.SERVICE;
-  const title = titles.split("");
-  const duration = UI_ANIMATION?.TITLE?.DURATION || 1.0;
-  const delayPerChar = UI_ANIMATION?.TITLE?.DELAY_PER_CHAR || 0.10;
-  const extraDelay = UI_ANIMATION?.TITLE?.EXTRA_DELAY || 0.2;
-  const totalDelay = (title.length - 1) * delayPerChar + duration + extraDelay;
-
-  // 初期表示時の可視性をチェック
-  useEffect(() => {
-    const checkInitialVisibility = () => {
-      if (titleRef.current) {
-        const rect = titleRef.current.getBoundingClientRect();
-        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-        setIsInitiallyVisible(isVisible);
-      }
-    };
-
-    const timer = setTimeout(checkInitialVisibility, DOM_TIMEOUTS?.INITIAL_VISIBILITY_CHECK || 100);
-    return () => clearTimeout(timer);
-  }, []);
-
-  // カードのアニメーション開始タイミング制御
-  useEffect(() => {
-    if (gridInView) {
-      setShowCards(new Array(SERVICES.length).fill(true));
-    }
-  }, [gridInView, totalDelay, isInitiallyVisible]);
-
-  // タイトルアニメーション
-  const textAnimate = title.map((char, index) => (
-    <motion.span
-      initial={{ opacity: 0 }}
-      animate={inView ? { opacity: 1 } : { opacity: 0 }}
-      transition={{ duration, delay: index * delayPerChar }}
-      key={index}
-    >
-      {char}
-    </motion.span>
-  ));
-
-  return (
-    <SectionWrapper id="service" className={styles.serviceSection}>
-      <h2 ref={titleRef} className={`${styles.serviceTitle} sectionTitle`}>
-        {textAnimate}
-      </h2>
-      
-      <div ref={gridRef} className={styles.serviceGrid}>
-        {SERVICES.map((service, index) => {
-          const serviceDetail = SERVICE_DETAILS[service.id];
-          if (!serviceDetail) {
-            console.warn(`Service detail not found for: ${service.id}`);
-            return null;
-          }
-
-          return (
-            <ServiceCard
-              key={service.id}
-              service={serviceDetail}
-              isAnimating={showCards[index]}
-              className={`${animationStyles.slideReveal} ${showCards[index] ? animationStyles.animate : ''}`}
-            />
-          );
-        })}
-      </div>
-    </SectionWrapper>
   );
 }

@@ -1,6 +1,8 @@
-// コンテンツ関連の定数定義
+import { ServiceDetail } from "@/types";
 
-/** セクションタイトル */
+/** ============================
+ *  セクションタイトル 
+ *  ============================ */
 export const SECTION_TITLES = {
   MAIN_VISUAL: "着物コレクション",
   ABOUT: "私について", 
@@ -8,7 +10,10 @@ export const SECTION_TITLES = {
   CONTACT: "お問い合わせ",
 } as const;
 
-/** サービス一覧 */
+/** ============================
+ *  サービス 
+ *  ============================ */
+/* サービス一覧 */
 export const SERVICES = [
   { id: "seijinshiki", name: "成人式", description: "成人式の振袖着付けサービス" },
   { id: "sotsugyoushiki", name: "卒業式", description: "卒業式の袴着付けサービス" },
@@ -20,7 +25,150 @@ export const SERVICES = [
   { id: "houmon", name: "出張/訪問", description: "お客様のご自宅への出張着付けサービス" },
 ] as const;
 
-/** FAQ データ */
+/* サービス詳細 */
+export const SERVICE_DETAILS: Record<string, ServiceDetail> = {
+  seijinshiki: {
+    id: "seijinshiki",
+    name: "成人式",
+    description: "成人式の振袖着付けサービス",
+    pricing: {
+      base: "¥15,000~",
+      travel: "¥2,000~",
+      options: [
+        { name: "ヘアセット", price: "¥8,000" },
+        { name: "メイク", price: "¥6,000" }
+      ]
+    },
+    duration: "約90分",
+    included: [
+      "振袖着付け",
+      "帯結び",
+      "小物セット",
+      "着崩れ直し説明"
+    ],
+    notes: [
+      "早朝対応可能",
+      "ご自宅での着付けも承ります"
+    ]
+  },
+  sotsugyoushiki: {
+    id: "sotsugyoushiki", 
+    name: "卒業式",
+    description: "卒業式の袴着付けサービス",
+    pricing: {
+      base: "¥12,000~",
+      travel: "¥2,000~",
+      options: [
+        { name: "ヘアセット", price: "¥6,000" },
+        { name: "メイク", price: "¥5,000" }
+      ]
+    },
+    duration: "約60分",
+    included: [
+      "袴着付け",
+      "帯結び", 
+      "小物セット"
+    ]
+  },
+  shichigosan: {
+    id: "shichigosan",
+    name: "七五三", 
+    description: "七五三の着物着付けサービス",
+    pricing: {
+      base: "¥8,000~",
+      travel: "¥1,500~"
+    },
+    duration: "約45分",
+    included: [
+      "着物着付け",
+      "帯結び",
+      "髪飾り付け"
+    ]
+  },
+  yukata: {
+    id: "yukata",
+    name: "浴衣",
+    description: "浴衣の着付けサービス", 
+    pricing: {
+      base: "¥5,000~",
+      travel: "¥1,000~"
+    },
+    duration: "約30分",
+    included: [
+      "浴衣着付け",
+      "帯結び",
+      "基本小物"
+    ]
+  },
+  hurisode: {
+    id: "hurisode",
+    name: "振袖",
+    description: "振袖の着付けサービス",
+    pricing: {
+      base: "¥15,000~", 
+      travel: "¥2,000~"
+    },
+    duration: "約90分",
+    included: [
+      "振袖着付け",
+      "帯結び",
+      "小物セット"
+    ]
+  },
+  tomesode: {
+    id: "tomesode",
+    name: "留袖",
+    description: "留袖の着付けサービス",
+    pricing: {
+      base: "¥12,000~",
+      travel: "¥2,000~"
+    },
+    duration: "約75分", 
+    included: [
+      "留袖着付け",
+      "帯結び",
+      "小物セット"
+    ]
+  },
+  omiyamairi: {
+    id: "omiyamairi",
+    name: "お宮参り",
+    description: "お宮参りの着物着付けサービス",
+    pricing: {
+      base: "¥10,000~",
+      travel: "¥1,500~"
+    },
+    duration: "約60分",
+    included: [
+      "着物着付け",
+      "帯結び",
+      "小物セット"
+    ]
+  },
+  houmon: {
+    id: "houmon", 
+    name: "出張/訪問",
+    description: "お客様のご自宅への出張着付けサービス",
+    pricing: {
+      base: "基本料金に準ずる",
+      travel: "¥1,000~3,000"
+    },
+    duration: "サービス内容による",
+    included: [
+      "ご自宅での着付け",
+      "必要小物持参",
+      "着崩れ直し説明"
+    ],
+    notes: [
+      "渋谷区中心",
+      "その他地域はご相談ください"
+    ]
+  }
+}
+
+/** ============================
+ *  FAQ 
+ *  ============================ */
 export const FAQ_DATA = [
   {
     question: "Q. 婚礼ロケーション撮影はヘアメイクや撮影も含まれますか？",
@@ -56,13 +204,15 @@ export const FAQ_DATA = [
   }
 ] as const;
 
-/** 事業者情報 */
+/** ============================
+ *  事業者情報 
+ *  ============================ */
 export const BUSINESS_INFO = {
   name: "着付け師境",
   alternateName: "きつけしさかい",
-  description: "千葉・君津市・木更津市の着付け師境。成人式・七五三・卒業式・振袖・留袖など出張着付けサービス。経験豊富なプロが訪問してお客様のご希望に合わせた美しい着物姿を実現します。",
-  shortDescription: "千葉・君津市・木更津市の出張着付けサービス",
-  serviceArea: "千葉県君津市・木更津市を中心とした周辺地域",
+  description: "渋谷区の着付け師境。成人式・七五三・卒業式・振袖・留袖など出張着付けサービス。経験豊富なプロが訪問してお客様のご希望に合わせた美しい着物姿を実現します。",
+  shortDescription: "支部y作の出張着付けサービス",
+  serviceArea: "渋谷区を中心とした周辺地域",
   openingHours: "9:00〜18:00（年中無休）",
   foundingDate: "2020",
   slogan: "美しい着物姿を実現する出張着付けサービス",
@@ -73,28 +223,34 @@ export const BUSINESS_INFO = {
   email: process.env.NEXT_PUBLIC_BUSINESS_EMAIL || "contact@example.com"
 } as const;
 
-/** 地理的情報 */
+/** ============================
+ *  地理的情報
+ *  ============================ */
 export const GEO_INFO = {
   latitude: 35.3315,
   longitude: 139.9023,
   radius: "30000", // 30km
   address: {
-    locality: "君津市",
-    region: "千葉県", 
+    locality: "渋谷区",
+    region: "東京都", 
     country: "JP"
   }
 } as const;
 
-/** About セクションのテキスト */
+/** ============================
+ *  About
+ *  ============================ */
 export const ABOUT_TEXT = {
-  experience_1: "千葉県君津市在住の着付け師です。",
+  experience_1: "東京都渋谷区在住の着付け師です。",
   experience_2: "もっと着物を日常に！着物は大変。苦しい。高い。",
   experience_3: "そんな色々を吹き飛ばしもっと気楽に着ていただきたい。",
   experience_4: "着る楽しさ。着せる喜び。",
   experience_5: "着物の装いをお手伝いできる喜びをモットーに地域密着で活動させていただいてます。",
 } as const;
 
-/** ポリシー関連 */
+/** ============================
+ *  ポリシー関連 
+ *  ============================ */
 export const POLICIES = {
   SITE_POLICY: {
     title: "サイトポリシー",
@@ -107,7 +263,7 @@ export const POLICIES = {
 <p>当サイトに掲載している情報の正確性については万全を期していますが、利用者が当サイトの情報を用いて行う一切の行為について責任を負うものではありません。</p>
 
 <h3>3. 著作権</h3>
-<p>当サイトのコンテンツ（文章、画像、デザインなど）の著作権は境祐岐江に帰属します。無断転載・複製を禁止します。</p>
+<p>当サイトのコンテンツ（文章、画像、デザインなど）の著作権は〇〇に帰属します。無断転載・複製を禁止します。</p>
 
 <h3>4. リンクについて</h3>
 <p>当サイトへのリンクは原則として自由ですが、事前にご連絡いただけますと幸いです。</p>

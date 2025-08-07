@@ -5,7 +5,7 @@ User-agent: *
 Allow: /
 
 # サイトマップの場所を指定
-Sitemap: https://kituke-sakai.vercel.app/sitemap.xml
+Sitemap: https://kituke-project.vercel.app/sitemap.xml
 
 # クロール頻度の調整（1日1回程度）
 Crawl-delay: 1

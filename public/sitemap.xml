@@ -8,7 +8,7 @@
 
   <!-- メインページ -->
   <url>
-    <loc>https://kituke-sakai.vercel.app/</loc>
+    <loc>https://kituke-project.vercel.app/</loc>
     <lastmod>2025-01-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -17,7 +17,7 @@
 
   <!-- サービスセクション（アンカーリンク） -->
   <url>
-    <loc>https://kituke-sakai.vercel.app/#service</loc>
+    <loc>https://kituke-project.vercel.app/#service</loc>
     <lastmod>2025-01-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -35,7 +35,7 @@
 
   <!-- スライドセクション（アンカーリンク） -->
   <url>
-    <loc>https://kituke-sakai.vercel.app/#slide</loc>
+    <loc>https://kituke-project.vercel.app/#slide</loc>
     <lastmod>2025-01-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

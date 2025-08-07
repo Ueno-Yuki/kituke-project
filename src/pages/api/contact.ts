@@ -66,7 +66,7 @@ export default async function handler(
     const { data, error } = await resend.emails.send({
       from: 'Acme <onboarding@resend.dev>', // Resendのテスト用ドメイン
       to: [email], // 入力されたメールアドレスに送信
-      subject: `【着付け師境】お問い合わせ: ${name}様より`,
+      subject: `【着付け師】お問い合わせ: ${name}様より`,
       html: `
         <div style="font-family: 'Noto Sans JP', Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
           <h2 style="color: #7a5c3e; border-bottom: 2px solid #7a5c3e; padding-bottom: 10px;">
@@ -89,7 +89,7 @@ export default async function handler(
           </div>
           
           <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 12px; color: #666;">
-            <p>このメールは着付け師境のWebサイトのお問い合わせフォームから送信されました。</p>
+            <p>このメールは着付け師のWebサイトのお問い合わせフォームから送信されました。</p>
           </div>
         </div>
       `,
